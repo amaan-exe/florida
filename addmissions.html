@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Online Admissions - Florida English Academy</title>
+    <meta name="description" content="Apply online to Florida English Academy. Complete your admission application in 5 simple steps. Quality education since 2010.">
+    
+    <!-- SEO Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "School",
+        "name": "Florida English Academy",
+        "url": "https://floridaacademy.edu",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Florida",
+            "addressCountry": "US"
+        },
+        "telephone": "+1-XXX-XXX-XXXX",
+        "email": "admissions@floridaacademy.edu"
+    }
+    </script>
+    
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Public+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <!-- GSAP for Animations -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: "class", 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        primary: "#607AFB", "primary-focus": "#e04e4e", "primary-content": "#ffffff", 
+                        secondary: "#ffe66d", "secondary-focus": "#e0cc5f", "secondary-content": "#333333", 
+                        accent: "#4ecdc4", "accent-focus": "#3ba9a2", "accent-content": "#ffffff", 
+                        neutral: "#333333", "neutral-focus": "#1a1a1a", "neutral-content": "#ffffff", 
+                        "base-100": "#f7fcfd", "base-200": "#e0f7fa", "base-300": "#b2ebf2", "base-content": "#333333", 
+                        info: "#3abff8", success: "#36d399", warning: "#fbbd23", error: "#f87272", 
+                        "background-light": "#f5f6f8", "background-dark": "#0f1323", 
+                        "foreground-light": "#333333", "foreground-dark": "#ffffff", 
+                        "subtle-light": "#6b7280", "subtle-dark": "#9ca3af"
+                    }, 
+                    fontFamily: { 
+                        display: "Public Sans", 
+                        heading: ["Gochi Hand", "cursive"] 
+                    }, 
+                    borderRadius: { 
+                        DEFAULT: "1rem", lg: "2rem", xl: "3rem", full: "9999px" 
+                    }, 
+                    keyframes: {
+                        "float-up": {"0%": {transform: "translateY(20px)", opacity: "0"}, "100%": {transform: "translateY(0)", opacity: "1"}}, 
+                        "fade-in": {"0%": {opacity: "0"}, "100%": {opacity: "1"}}, 
+                        wiggle: {"0%, 100%": {transform: "rotate(-3deg)"}, "50%": {transform: "rotate(3deg)"}}, 
+                        "pop-in": {"0%": {transform: "scale(0.8)", opacity: "0"}, "100%": {transform: "scale(1)", opacity: "1"}}
+                    }, 
+                    animation: {
+                        "float-up": "float-up 0.8s ease-out forwards", 
+                        "fade-in": "fade-in 1s ease-out forwards", 
+                        wiggle: "wiggle 1s ease-in-out infinite", 
+                        "pop-in": "pop-in 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards"
+                    }
+                }
+            }
+        };
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .animation-delay-200 { animation-delay: 0.2s; }
+            .animation-delay-400 { animation-delay: 0.4s; }
+            .scribble-underline { position: relative; display: inline-block; }
+            .scribble-underline::after {
+                content: ''; position: absolute; left: 0; bottom: -5px; width: 100%; height: 8px;
+                background-image: url('data:image/svg+xml;utf8,<svg width="100" height="10" viewBox="0 0 100 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8.5C18 3.5 82 2.5 99 7.5" stroke="%23ffe66d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+                background-repeat: no-repeat; background-size: 100% 100%;
+            }
+            .form-input {
+                width: 100%;
+                padding: 0.75rem 1rem;
+                border: 1px solid #d1d5db;
+                border-radius: 0.75rem;
+                font-size: 1rem;
+                transition: all 0.2s ease;
+            }
+            .form-input:focus {
+                outline: none;
+                border-color: #607AFB;
+                box-shadow: 0 0 0 2px rgba(96, 122, 251, 0.2);
+            }
+            .step-content { display: none; }
+            .step-content.active { display: block; }
+            .step {
+                flex: 1;
+                padding: 0.75rem;
+                text-align: center;
+                font-size: 0.875rem;
+                font-weight: 500;
+                border-radius: 0.5rem;
+                transition: all 0.3s ease;
+                margin: 0 0.25rem;
+            }
+            .step.active {
+                background: #607AFB;
+                color: white;
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-base-content">
+    <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            
+            <!-- HEADER -->
+            <header class="flex items-center justify-between whitespace-nowrap border-b border-primary/20 px-10 py-4 sticky top-0 z-50 bg-base-100/95 backdrop-blur-sm">
+                <div class="flex items-center gap-3 text-foreground-light dark:text-foreground-dark">
+                    <div class="h-10 w-10 text-primary">
+                        <svg class="transform transition-transform duration-500 hover:rotate-6" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.8261 30.5736C16.7203 29.8826 20.2244 29.4783 24 29.4783C27.7756 29.4783 31.2797 29.8826 34.1739 30.5736C36.9144 31.2278 39.9967 32.7669 41.3563 33.8352L24.8486 7.36089C24.4571 6.73303 23.5429 6.73303 23.1514 7.36089L6.64374 33.8352C8.00331 32.7669 11.0856 31.2278 13.8261 30.5736Z" fill="currentColor"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-heading font-bold">Florida English Academy</h2>
+                </div>
+                <nav class="hidden items-center gap-9 lg:flex">
+                    <a class="text-sm font-medium text-foreground-light dark:text-foreground-dark transition-colors hover:text-primary nav-link" href="index.html">Home</a>
+                    <a class="text-sm font-medium text-foreground-light dark:text-foreground-dark transition-colors hover:text-primary nav-link" href="about.html">About Us</a>
+                    <a class="text-sm font-medium text-foreground-light dark:text-foreground-dark transition-colors hover:text-primary nav-link" href="academics.html">Academics</a>
+                    <a class="text-sm font-medium text-foreground-light dark:text-foreground-dark transition-colors hover:text-primary nav-link active" href="addmissions.html">Admissions</a>
+                    <a class="text-sm font-medium text-foreground-light dark:text-foreground-dark transition-colors hover:text-primary nav-link" href="student-life.html">Student Life</a>
+                    <a class="text-sm font-medium text-foreground-light dark:text-foreground-dark transition-colors hover:text-primary nav-link" href="index.html#gallery">Gallery</a>
+                </nav>
+                <button class="hidden lg:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-secondary text-secondary-content text-sm font-bold shadow-lg transition-transform hover:scale-105 hover:shadow-xl">
+                    <span class="truncate">Apply Now</span>
+                </button>
+            </header>
+
+            <main class="flex-1">
+                
+                <!-- HERO SECTION -->
+                <section class="relative overflow-hidden bg-gradient-to-br from-primary to-accent py-20 lg:py-32">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 opacity-70"></div>
+                    <div class="absolute top-1/4 left-10 w-20 h-20 bg-secondary rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-float-up animation-delay-200"></div>
+                    <div class="absolute bottom-1/4 right-10 w-24 h-24 bg-accent rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-float-up animation-delay-400"></div>
+                    
+                    <div class="container mx-auto px-5 md:px-10 lg:px-20 relative z-10 text-center text-white">
+                        <h1 class="text-4xl font-heading font-extrabold sm:text-5xl lg:text-6xl animate-pop-in scribble-underline">
+                            Online Admissions
+                        </h1>
+                        <p class="mt-6 max-w-2xl text-lg opacity-90 mx-auto animate-fade-in animation-delay-200">
+                            Join Florida English Academy - Where Excellence Meets Innovation<br>
+                            <strong>Established 1st April 2010</strong>
+                        </p>
+                        <div class="mt-10 flex items-center justify-center gap-4 animate-fade-in animation-delay-400">
+                            <div class="flex items-center gap-2 bg-white/20 rounded-full px-4 py-2">
+                                <span class="text-sm">📋</span>
+                                <span class="text-sm font-medium">5 Simple Steps</span>
+                            </div>
+                            <div class="flex items-center gap-2 bg-white/20 rounded-full px-4 py-2">
+                                <span class="text-sm">⚡</span>
+                                <span class="text-sm font-medium">Quick Process</span>
+                            </div>
+                            <div class="flex items-center gap-2 bg-white/20 rounded-full px-4 py-2">
+                                <span class="text-sm">📧</span>
+                                <span class="text-sm font-medium">Email Confirmation</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ADMISSION PROCESS INFO -->
+                <section class="py-20 px-5 md:px-20 lg:px-40 bg-base-100">
+                    <div class="container mx-auto max-w-6xl">
+                        <div class="text-center mb-16">
+                            <h2 class="text-3xl font-heading font-bold text-foreground-light dark:text-foreground-dark sm:text-4xl">Admission Process</h2>
+                            <p class="mt-4 text-lg text-subtle-light dark:text-subtle-dark">Simple, transparent, and student-friendly</p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                            <div class="text-center p-6 bg-white dark:bg-neutral rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+                                <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 text-white text-2xl font-bold">1</div>
+                                <h3 class="text-lg font-semibold text-foreground-light dark:text-foreground-dark mb-2">Fill Application</h3>
+                                <p class="text-sm text-subtle-light dark:text-subtle-dark">Complete the online form with student and guardian details</p>
+                            </div>
+                            <div class="text-center p-6 bg-white dark:bg-neutral rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+                                <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4 text-secondary-content text-2xl font-bold">2</div>
+                                <h3 class="text-lg font-semibold text-foreground-light dark:text-foreground-dark mb-2">Submit Documents</h3>
+                                <p class="text-sm text-subtle-light dark:text-subtle-dark">Upload required documents and certificates</p>
+                            </div>
+                            <div class="text-center p-6 bg-white dark:bg-neutral rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+                                <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4 text-accent-content text-2xl font-bold">3</div>
+                                <h3 class="text-lg font-semibold text-foreground-light dark:text-foreground-dark mb-2">Review & Interview</h3>
+                                <p class="text-sm text-subtle-light dark:text-subtle-dark">Our team reviews application and schedules interview</p>
+                            </div>
+                            <div class="text-center p-6 bg-white dark:bg-neutral rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+                                <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-2xl font-bold">4</div>
+                                <h3 class="text-lg font-semibold text-foreground-light dark:text-foreground-dark mb-2">Admission Confirmed</h3>
+                                <p class="text-sm text-subtle-light dark:text-subtle-dark">Receive admission letter and fee structure</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ADMISSION FORM -->
+                <section class="py-20 px-5 md:px-20 lg:px-40 bg-base-200">
+                    <div class="container mx-auto max-w-4xl">
+                        <div class="text-center mb-16">
+                            <h2 class="text-3xl font-heading font-bold sm:text-4xl">Application Form</h2>
+                            <p class="mt-4 text-lg text-subtle-light dark:text-subtle-dark">Complete your application in 5 simple steps</p>
+                        </div>
+                        
+                        <form id="admissionForm" class="bg-white rounded-xl p-8 shadow-lg">
+                            <div class="step-progress flex justify-between mb-8 gap-2">
+                                <div class="step active flex-1 p-3 text-center bg-primary text-white rounded-full font-bold text-sm">1. Personal</div>
+                                <div class="step flex-1 p-3 text-center bg-gray-200 rounded-full text-sm">2. Academic</div>
+                                <div class="step flex-1 p-3 text-center bg-gray-200 rounded-full text-sm">3. Documents</div>
+                                <div class="step flex-1 p-3 text-center bg-gray-200 rounded-full text-sm">4. Guardian</div>
+                                <div class="step flex-1 p-3 text-center bg-gray-200 rounded-full text-sm">5. Review</div>
+                            </div>
+                            
+                            <!-- STEP 1: Personal Information -->
+                            <div class="step-content active" data-step="1">
+                                <h3 class="text-xl font-bold mb-6 text-primary">Personal Information</h3>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <input type="text" name="studentName" placeholder="Student Full Name *" required class="form-input">
+                                    <input type="date" name="dob" required class="form-input">
+                                    <select name="gender" required class="form-input">
+                                        <option value="">Select Gender *</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                    <input type="tel" name="phone" placeholder="Phone Number *" required class="form-input">
+                                    <input type="email" name="email" placeholder="Email Address" class="form-input">
+                                    <input type="text" name="address" placeholder="Address" class="form-input">
+                                </div>
+                            </div>
+
+                            <!-- STEP 2: Academic Information -->
+                            <div class="step-content" data-step="2">
+                                <h3 class="text-xl font-bold mb-6 text-primary">Academic Information</h3>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <select name="grade" required class="form-input">
+                                        <option value="">Applying for Grade *</option>
+                                        <option value="1">Grade 1</option>
+                                        <option value="2">Grade 2</option>
+                                        <option value="3">Grade 3</option>
+                                        <option value="4">Grade 4</option>
+                                        <option value="5">Grade 5</option>
+                                        <option value="6">Grade 6</option>
+                                        <option value="7">Grade 7</option>
+                                        <option value="8">Grade 8</option>
+                                        <option value="9">Grade 9</option>
+                                        <option value="10">Grade 10</option>
+                                        <option value="11">Grade 11</option>
+                                        <option value="12">Grade 12</option>
+                                    </select>
+                                    <input type="text" name="previousSchool" placeholder="Previous School" class="form-input">
+                                    <input type="text" name="academicYear" placeholder="Academic Year (e.g., 2024-25)" class="form-input">
+                                    <select name="transport" class="form-input">
+                                        <option value="">Transport Required?</option>
+                                        <option value="yes">Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                    <textarea name="specialNeeds" placeholder="Special Needs or Requirements" class="form-input md:col-span-2" rows="3"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- STEP 3: Documents -->
+                            <div class="step-content" data-step="3">
+                                <h3 class="text-xl font-bold mb-6 text-primary">Required Documents</h3>
+                                <div class="space-y-4">
+                                    <div class="p-4 bg-primary/10 rounded-lg">
+                                        <h4 class="font-semibold text-primary mb-2">Please prepare the following documents:</h4>
+                                        <ul class="text-sm text-subtle-light space-y-1">
+                                            <li>• Birth Certificate</li>
+                                            <li>• Previous School Report Card</li>
+                                            <li>• Passport Size Photographs (2 copies)</li>
+                                            <li>• Medical Certificate</li>
+                                            <li>• Transfer Certificate (if applicable)</li>
+                                        </ul>
+                                    </div>
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <input type="text" name="documentStatus" placeholder="Document Status" class="form-input">
+                                        <input type="date" name="submissionDate" placeholder="Expected Submission Date" class="form-input">
+                                    </div>
+                                    <textarea name="additionalInfo" placeholder="Additional Information" class="form-input" rows="3"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- STEP 4: Guardian Information -->
+                            <div class="step-content" data-step="4">
+                                <h3 class="text-xl font-bold mb-6 text-primary">Guardian Information</h3>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <input type="text" name="guardianName" placeholder="Guardian Full Name *" required class="form-input">
+                                    <input type="text" name="guardianRelation" placeholder="Relationship to Student *" required class="form-input">
+                                    <input type="tel" name="guardianPhone" placeholder="Guardian Phone *" required class="form-input">
+                                    <input type="email" name="guardianEmail" placeholder="Guardian Email" class="form-input">
+                                    <input type="text" name="guardianOccupation" placeholder="Occupation" class="form-input">
+                                    <input type="text" name="guardianAddress" placeholder="Guardian Address" class="form-input">
+                                </div>
+                            </div>
+
+                            <!-- STEP 5: Review & Submit -->
+                            <div class="step-content" data-step="5">
+                                <h3 class="text-xl font-bold mb-6 text-primary">Review Your Application</h3>
+                                <div class="p-6 bg-gray-50 rounded-lg">
+                                    <p class="text-sm text-subtle-light mb-4">Please review all information before submitting:</p>
+                                    <div id="review-summary" class="space-y-2 text-sm">
+                                        <!-- Summary will be populated by JavaScript -->
+                                    </div>
+                                </div>
+                                <div class="mt-6 p-4 bg-primary/10 rounded-lg">
+                                    <h4 class="font-semibold text-primary mb-2">Next Steps:</h4>
+                                    <ul class="text-sm text-subtle-light space-y-1">
+                                        <li>• You will receive a confirmation email</li>
+                                        <li>• Our admissions team will contact you within 2-3 business days</li>
+                                        <li>• Please prepare the required documents</li>
+                                        <li>• Schedule a campus visit if needed</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between gap-4 mt-8">
+                                <button type="button" id="prevBtn" class="px-6 py-3 bg-gray-500 text-white rounded-full font-bold hidden">Previous</button>
+                                <button type="button" id="nextBtn" class="px-6 py-3 bg-primary text-white rounded-full font-bold ml-auto">Next</button>
+                                <button type="submit" id="submitBtn" class="px-6 py-3 bg-green-500 text-white rounded-full font-bold hidden">Submit Application</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- ADMISSION REQUIREMENTS -->
+                <section class="py-20 px-5 md:px-20 lg:px-40 bg-base-100">
+                    <div class="container mx-auto max-w-6xl">
+                        <div class="text-center mb-16">
+                            <h2 class="text-3xl font-heading font-bold text-foreground-light dark:text-foreground-dark sm:text-4xl">Admission Requirements</h2>
+                            <p class="mt-4 text-lg text-subtle-light dark:text-subtle-dark">Everything you need to know for a successful application</p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                            <div class="bg-white dark:bg-neutral rounded-xl p-8 shadow-lg">
+                                <h3 class="text-2xl font-bold text-primary mb-6">Age Requirements</h3>
+                                <div class="space-y-4">
+                                    <div class="flex items-center gap-3 p-3 bg-primary/5 rounded-lg">
+                                        <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold text-sm">1-5</div>
+                                        <div>
+                                            <p class="font-semibold">Primary Grades</p>
+                                            <p class="text-sm text-subtle-light">Ages 5-10 years</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-3 p-3 bg-secondary/10 rounded-lg">
+                                        <div class="w-8 h-8 bg-secondary rounded-full flex items-center justify-center text-secondary-content font-bold text-sm">6-8</div>
+                                        <div>
+                                            <p class="font-semibold">Middle Grades</p>
+                                            <p class="text-sm text-subtle-light">Ages 11-13 years</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-3 p-3 bg-accent/10 rounded-lg">
+                                        <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center text-accent-content font-bold text-sm">9-12</div>
+                                        <div>
+                                            <p class="font-semibold">Senior Grades</p>
+                                            <p class="text-sm text-subtle-light">Ages 14-17 years</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white dark:bg-neutral rounded-xl p-8 shadow-lg">
+                                <h3 class="text-2xl font-bold text-primary mb-6">Fee Structure</h3>
+                                <div class="space-y-4">
+                                    <div class="flex justify-between items-center p-3 bg-primary/5 rounded-lg">
+                                        <span class="font-semibold">Registration Fee</span>
+                                        <span class="text-primary font-bold">$50</span>
+                                    </div>
+                                    <div class="flex justify-between items-center p-3 bg-secondary/10 rounded-lg">
+                                        <span class="font-semibold">Annual Tuition (Primary)</span>
+                                        <span class="text-secondary font-bold">$2,500</span>
+                                    </div>
+                                    <div class="flex justify-between items-center p-3 bg-accent/10 rounded-lg">
+                                        <span class="font-semibold">Annual Tuition (Middle)</span>
+                                        <span class="text-accent font-bold">$3,000</span>
+                                    </div>
+                                    <div class="flex justify-between items-center p-3 bg-green-100 rounded-lg">
+                                        <span class="font-semibold">Annual Tuition (Senior)</span>
+                                        <span class="text-green-600 font-bold">$3,500</span>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-subtle-light mt-4">* Fees are subject to change. Contact us for detailed fee structure.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CONTACT INFO -->
+                <section class="py-20 px-5 md:px-20 lg:px-40 bg-base-200">
+                    <div class="container mx-auto max-w-4xl text-center">
+                        <h2 class="text-3xl font-heading font-bold text-foreground-light dark:text-foreground-dark sm:text-4xl mb-8">Need Help?</h2>
+                        <p class="text-lg text-subtle-light dark:text-subtle-dark mb-12">Our admissions team is here to assist you with any questions</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <div class="p-6 bg-white dark:bg-neutral rounded-xl shadow-md">
+                                <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 text-white text-2xl">📞</div>
+                                <h3 class="font-bold text-lg mb-2">Call Us</h3>
+                                <p class="text-primary font-semibold">+1 (555) 123-4567</p>
+                                <p class="text-sm text-subtle-light">Mon-Fri, 9AM-5PM</p>
+                            </div>
+                            <div class="p-6 bg-white dark:bg-neutral rounded-xl shadow-md">
+                                <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4 text-secondary-content text-2xl">📧</div>
+                                <h3 class="font-bold text-lg mb-2">Email Us</h3>
+                                <p class="text-secondary font-semibold">admissions@floridaacademy.edu</p>
+                                <p class="text-sm text-subtle-light">24/7 Support</p>
+                            </div>
+                            <div class="p-6 bg-white dark:bg-neutral rounded-xl shadow-md">
+                                <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4 text-accent-content text-2xl">📍</div>
+                                <h3 class="font-bold text-lg mb-2">Visit Us</h3>
+                                <p class="text-accent font-semibold">123 Education St</p>
+                                <p class="text-sm text-subtle-light">Florida, USA</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+
+            <!-- FOOTER -->
+            <footer class="border-t border-primary/20 px-5 py-10 text-center md:px-20 lg:px-40 bg-base-100 dark:bg-neutral">
+                <div class="flex flex-col items-center justify-between gap-8 md:flex-row">
+                    <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
+                        <a class="text-sm text-subtle-light dark:text-subtle-dark transition-colors hover:text-primary" href="#">Privacy Policy</a>
+                        <a class="text-sm text-subtle-light dark:text-subtle-dark transition-colors hover:text-primary" href="#">Terms of Service</a>
+                        <a class="text-sm text-subtle-light dark:text-subtle-dark transition-colors hover:text-primary" href="#">Contact Us</a>
+                    </div>
+                    <p class="text-sm text-subtle-light dark:text-subtle-dark">© 2023 Florida English Academy. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- COMPLETE JAVASCRIPT -->
+    <script src="main.js"></script>
+</body>
+</html>

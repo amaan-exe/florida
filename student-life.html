@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Life - Florida English Academy</title>
+    <meta name="description" content="Explore vibrant student life at Florida English Academy - Clubs, Sports, Events, House System, and more!">
+    
+    <!-- SEO Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "School",
+        "name": "Florida English Academy",
+        "educationalProgram": "Co-educational K-12",
+        "extracurricularActivities": ["Sports", "Arts", "Clubs", "Student Government"]
+    }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Public+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: "class", 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        primary: "#607AFB", "primary-focus": "#e04e4e", "primary-content": "#ffffff", 
+                        secondary: "#ffe66d", "secondary-focus": "#e0cc5f", "secondary-content": "#333333", 
+                        accent: "#4ecdc4", "accent-focus": "#3ba9a2", "accent-content": "#ffffff", 
+                        neutral: "#333333", "neutral-focus": "#1a1a1a", "neutral-content": "#ffffff", 
+                        "base-100": "#f7fcfd", "base-200": "#e0f7fa", "base-300": "#b2ebf2", "base-content": "#333333", 
+                        info: "#3abff8", success: "#36d399", warning: "#fbbd23", error: "#f87272", 
+                        "background-light": "#f5f6f8", "background-dark": "#0f1323", 
+                        "foreground-light": "#333333", "foreground-dark": "#ffffff", 
+                        "subtle-light": "#6b7280", "subtle-dark": "#9ca3af"
+                    }, 
+                    fontFamily: { 
+                        display: "Public Sans", 
+                        heading: ["Gochi Hand", "cursive"] 
+                    }, 
+                    borderRadius: { 
+                        DEFAULT: "1rem", lg: "2rem", xl: "3rem", full: "9999px" 
+                    }, 
+                    keyframes: {
+                        "float-up": {"0%": {transform: "translateY(20px)", opacity: "0"}, "100%": {transform: "translateY(0)", opacity: "1"}}, 
+                        "fade-in": {"0%": {opacity: "0"}, "100%": {opacity: "1"}}, 
+                        wiggle: {"0%, 100%": {transform: "rotate(-3deg)"}, "50%": {transform: "rotate(3deg)"}}, 
+                        "pop-in": {"0%": {transform: "scale(0.8)", opacity: "0"}, "100%": {transform: "scale(1)", opacity: "1"}}
+                    }, 
+                    animation: {
+                        "float-up": "float-up 0.8s ease-out forwards", 
+                        "fade-in": "fade-in 1s ease-out forwards", 
+                        wiggle: "wiggle 1s ease-in-out infinite", 
+                        "pop-in": "pop-in 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards"
+                    }
+                }
+            }
+        };
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .animation-delay-200 { animation-delay: 0.2s; }
+            .animation-delay-400 { animation-delay: 0.4s; }
+            .scribble-underline { position: relative; display: inline-block; }
+            .scribble-underline::after {
+                content: ''; position: absolute; left: 0; bottom: -5px; width: 100%; height: 8px;
+                background-image: url('data:image/svg+xml;utf8,<svg width="100" height="10" viewBox="0 0 100 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8.5C18 3.5 82 2.5 99 7.5" stroke="%23ffe66d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+                background-repeat: no-repeat; background-size: 100% 100%;
+            }
+            .house-card {
+                background: white;
+                border-radius: 0.75rem;
+                padding: 1.5rem;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease;
+                border-bottom: 4px solid;
+            }
+            .house-card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            }
+            .activity-card {
+                background: white;
+                border-radius: 0.75rem;
+                padding: 1.5rem;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease;
+            }
+            .activity-card:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-base-content">
+    
+<!-- HEADER -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-primary/20 px-10 py-4 sticky top-0 z-50 bg-base-100/95 backdrop-blur-sm">
+    <div class="flex items-center gap-3 text-foreground-light dark:text-foreground-dark">
+        <div class="h-10 w-10 text-primary">
+            <svg class="transform transition-transform duration-500 hover:rotate-6" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13.8261 30.5736C16.7203 29.8826 20.2244 29.4783 24 29.4783C27.7756 29.4783 31.2797 29.8826 34.1739 30.5736C36.9144 31.2278 39.9967 32.7669 41.3563 33.8352L24.8486 7.36089C24.4571 6.73303 23.5429 6.73303 23.1514 7.36089L6.64374 33.8352C8.00331 32.7669 11.0856 31.2278 13.8261 30.5736Z" fill="currentColor"></path>
+            </svg>
+        </div>
+        <h2 class="text-xl font-heading font-bold">Florida English Academy</h2>
+    </div>
+    <nav class="hidden items-center gap-9 lg:flex">
+        <a class="nav-link text-sm font-medium text-foreground-light dark:text-foreground-dark transition-colors hover:text-primary" href="index.html">Home</a>
+        <a class="nav-link text-sm font-medium text-foreground-light dark:text-foreground-dark transition-colors hover:text-primary" href="about.html">About Us</a>
+        <a class="nav-link text-sm font-medium text-foreground-light dark:text-foreground-dark transition-colors hover:text-primary" href="academics.html">Academics</a>
+        <a class="nav-link text-sm font-medium text-foreground-light dark:text-foreground-dark transition-colors hover:text-primary" href="addmissions.html">Admissions</a>
+        <a class="nav-link active text-sm font-medium text-primary font-bold" href="student-life.html">Student Life</a>
+        <a class="nav-link text-sm font-medium text-foreground-light dark:text-foreground-dark transition-colors hover:text-primary" href="index.html#gallery">Gallery</a>
+    </nav>
+    <a href="addmissions.html" class="hidden lg:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-secondary text-secondary-content text-sm font-bold shadow-lg transition-transform hover:scale-105 hover:shadow-xl">
+        <span class="truncate">Enroll Now</span>
+    </a>
+</header>
+
+<main class="flex-1">
+    <!-- HERO BANNER -->
+    <section class="relative overflow-hidden bg-gradient-to-br from-primary to-accent py-20 lg:py-32">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 opacity-70"></div>
+        <div class="absolute top-1/4 left-10 w-20 h-20 bg-secondary rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-float-up animation-delay-200"></div>
+        <div class="absolute bottom-1/4 right-10 w-24 h-24 bg-accent rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-float-up animation-delay-400"></div>
+        
+        <div class="container mx-auto px-5 md:px-10 lg:px-20 relative z-10 text-center text-white">
+            <h1 class="text-4xl font-heading font-bold sm:text-5xl lg:text-6xl mb-6 animate-pop-in scribble-underline">
+                Vibrant Student Life
+            </h1>
+            <p class="text-xl max-w-3xl mx-auto opacity-90 animate-fade-in animation-delay-200">
+                Where learning meets fun, friendships flourish, and every day is an adventure
+            </p>
+            <div class="mt-10 flex items-center justify-center gap-4 animate-fade-in animation-delay-400">
+                <div class="flex items-center gap-2 bg-white/20 rounded-full px-4 py-2">
+                    <span class="text-sm">🏠</span>
+                    <span class="text-sm font-medium">House System</span>
+                </div>
+                <div class="flex items-center gap-2 bg-white/20 rounded-full px-4 py-2">
+                    <span class="text-sm">🎭</span>
+                    <span class="text-sm font-medium">Clubs & Activities</span>
+                </div>
+                <div class="flex items-center gap-2 bg-white/20 rounded-full px-4 py-2">
+                    <span class="text-sm">🏆</span>
+                    <span class="text-sm font-medium">Sports & Events</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOUSE SYSTEM -->
+    <section class="py-20 px-5 md:px-20 lg:px-40 bg-base-100">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-heading font-bold text-foreground-light dark:text-foreground-dark sm:text-4xl">House System</h2>
+                <p class="mt-4 text-lg text-subtle-light dark:text-subtle-dark">Building camaraderie and healthy competition</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="house-card text-center">
+                    <div class="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">☀️</div>
+                    <h3 class="text-xl font-bold mb-4 text-yellow-600">Sun House</h3>
+                    <div class="text-3xl font-bold text-yellow-600 mb-2">1,250</div>
+                    <p class="text-sm text-subtle-light mb-4">Points</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-yellow-400 h-2 rounded-full" style="width: 85%"></div>
+                    </div>
+                    <p class="text-xs text-subtle-light mt-2">85% of max points</p>
+                </div>
+                
+                <div class="house-card text-center">
+                    <div class="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">🌙</div>
+                    <h3 class="text-xl font-bold mb-4 text-blue-600">Moon House</h3>
+                    <div class="text-3xl font-bold text-blue-600 mb-2">1,180</div>
+                    <p class="text-sm text-subtle-light mb-4">Points</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-blue-500 h-2 rounded-full" style="width: 78%"></div>
+                    </div>
+                    <p class="text-xs text-subtle-light mt-2">78% of max points</p>
+                </div>
+                
+                <div class="house-card text-center">
+                    <div class="w-20 h-20 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">⭐</div>
+                    <h3 class="text-xl font-bold mb-4 text-purple-600">Star House</h3>
+                    <div class="text-3xl font-bold text-purple-600 mb-2">1,320</div>
+                    <p class="text-sm text-subtle-light mb-4">Points</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-purple-500 h-2 rounded-full" style="width: 88%"></div>
+                    </div>
+                    <p class="text-xs text-subtle-light mt-2">88% of max points</p>
+                </div>
+                
+                <div class="house-card text-center">
+                    <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">🌍</div>
+                    <h3 class="text-xl font-bold mb-4 text-green-600">Earth House</h3>
+                    <div class="text-3xl font-bold text-green-600 mb-2">1,290</div>
+                    <p class="text-sm text-subtle-light mb-4">Points</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-green-500 h-2 rounded-full" style="width: 86%"></div>
+                    </div>
+                    <p class="text-xs text-subtle-light mt-2">86% of max points</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <p class="text-lg text-subtle-light dark:text-subtle-dark mb-6">Points are earned through academic achievements, sports, arts, and community service</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <div class="flex items-center gap-2 bg-primary/10 rounded-full px-4 py-2">
+                        <span class="text-primary">📚</span>
+                        <span class="text-sm font-medium text-primary">Academic Excellence</span>
+                    </div>
+                    <div class="flex items-center gap-2 bg-secondary/10 rounded-full px-4 py-2">
+                        <span class="text-secondary">🏃</span>
+                        <span class="text-sm font-medium text-secondary">Sports & Fitness</span>
+                    </div>
+                    <div class="flex items-center gap-2 bg-accent/10 rounded-full px-4 py-2">
+                        <span class="text-accent">🎨</span>
+                        <span class="text-sm font-medium text-accent">Arts & Creativity</span>
+                    </div>
+                    <div class="flex items-center gap-2 bg-green-100 rounded-full px-4 py-2">
+                        <span class="text-green-600">🤝</span>
+                        <span class="text-sm font-medium text-green-600">Community Service</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLUBS & ACTIVITIES -->
+    <section class="py-20 px-5 md:px-20 lg:px-40 bg-base-200">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-heading font-bold text-foreground-light dark:text-foreground-dark sm:text-4xl">Clubs & Activities</h2>
+                <p class="mt-4 text-lg text-subtle-light dark:text-subtle-dark">Explore your passions and develop new skills</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="activity-card">
+                    <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6 text-white text-2xl">🎭</div>
+                    <h3 class="text-xl font-bold mb-4">Drama Club</h3>
+                    <p class="text-sm text-subtle-light mb-4">Express yourself through theater, acting, and stage production</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-semibold text-primary">25 Members</span>
+                        <span class="text-xs text-subtle-light">Meets: Tuesdays</span>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mb-6 text-secondary-content text-2xl">🎵</div>
+                    <h3 class="text-xl font-bold mb-4">Music Society</h3>
+                    <p class="text-sm text-subtle-light mb-4">Choir, band, and individual music lessons for all skill levels</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-semibold text-secondary">40 Members</span>
+                        <span class="text-xs text-subtle-light">Meets: Thursdays</span>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center mb-6 text-accent-content text-2xl">🔬</div>
+                    <h3 class="text-xl font-bold mb-4">Science Club</h3>
+                    <p class="text-sm text-subtle-light mb-4">Hands-on experiments, science fairs, and STEM competitions</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-semibold text-accent">30 Members</span>
+                        <span class="text-xs text-subtle-light">Meets: Wednesdays</span>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-6 text-white text-2xl">⚽</div>
+                    <h3 class="text-xl font-bold mb-4">Sports Club</h3>
+                    <p class="text-sm text-subtle-light mb-4">Football, basketball, volleyball, and track & field</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-semibold text-green-600">50 Members</span>
+                        <span class="text-xs text-subtle-light">Meets: Daily</span>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mb-6 text-white text-2xl">📝</div>
+                    <h3 class="text-xl font-bold mb-4">Debate Society</h3>
+                    <p class="text-sm text-subtle-light mb-4">Public speaking, critical thinking, and competitive debating</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-semibold text-purple-600">20 Members</span>
+                        <span class="text-xs text-subtle-light">Meets: Fridays</span>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mb-6 text-white text-2xl">🎨</div>
+                    <h3 class="text-xl font-bold mb-4">Art Club</h3>
+                    <p class="text-sm text-subtle-light mb-4">Painting, drawing, sculpture, and digital art</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-semibold text-orange-600">35 Members</span>
+                        <span class="text-xs text-subtle-light">Meets: Mondays</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EVENTS & CALENDAR -->
+    <section class="py-20 px-5 md:px-20 lg:px-40 bg-base-100">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-heading font-bold text-foreground-light dark:text-foreground-dark sm:text-4xl">Upcoming Events</h2>
+                <p class="mt-4 text-lg text-subtle-light dark:text-subtle-dark">Mark your calendars for these exciting events</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-neutral rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg">15</div>
+                        <div>
+                            <h3 class="font-bold text-lg">December</h3>
+                            <p class="text-sm text-subtle-light">2024</p>
+                        </div>
+                    </div>
+                    <h4 class="font-semibold text-lg mb-2">Annual Sports Day</h4>
+                    <p class="text-sm text-subtle-light mb-4">A day filled with friendly competition, games, and team spirit</p>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">Sports</span>
+                        <span class="text-xs bg-secondary/10 text-secondary px-2 py-1 rounded-full">All Grades</span>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-neutral rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 bg-secondary rounded-full flex items-center justify-center text-secondary-content font-bold text-lg">28</div>
+                        <div>
+                            <h3 class="font-bold text-lg">November</h3>
+                            <p class="text-sm text-subtle-light">2024</p>
+                        </div>
+                    </div>
+                    <h4 class="font-semibold text-lg mb-2">Parent-Teacher Meeting</h4>
+                    <p class="text-sm text-subtle-light mb-4">Discuss your child's progress and academic development</p>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs bg-accent/10 text-accent px-2 py-1 rounded-full">Academic</span>
+                        <span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">Parents</span>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-neutral rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center text-accent-content font-bold text-lg">5</div>
+                        <div>
+                            <h3 class="font-bold text-lg">December</h3>
+                            <p class="text-sm text-subtle-light">2024</p>
+                        </div>
+                    </div>
+                    <h4 class="font-semibold text-lg mb-2">Science Fair</h4>
+                    <p class="text-sm text-subtle-light mb-4">Showcase innovative projects and scientific discoveries</p>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Science</span>
+                        <span class="text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full">Competition</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STUDENT GOVERNMENT -->
+    <section class="py-20 px-5 md:px-20 lg:px-40 bg-base-200">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-heading font-bold text-foreground-light dark:text-foreground-dark sm:text-4xl">Student Government</h2>
+                <p class="mt-4 text-lg text-subtle-light dark:text-subtle-dark">Leadership opportunities and student voice</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center p-6 bg-white dark:bg-neutral rounded-xl shadow-md">
+                    <div class="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 text-white text-2xl">👑</div>
+                    <h3 class="font-bold text-lg mb-2">Student President</h3>
+                    <p class="text-primary font-semibold mb-2">Sarah Johnson</p>
+                    <p class="text-sm text-subtle-light">Grade 12</p>
+                </div>
+                
+                <div class="text-center p-6 bg-white dark:bg-neutral rounded-xl shadow-md">
+                    <div class="w-20 h-20 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4 text-secondary-content text-2xl">📋</div>
+                    <h3 class="font-bold text-lg mb-2">Vice President</h3>
+                    <p class="text-secondary font-semibold mb-2">Ahmed Ali</p>
+                    <p class="text-sm text-subtle-light">Grade 11</p>
+                </div>
+                
+                <div class="text-center p-6 bg-white dark:bg-neutral rounded-xl shadow-md">
+                    <div class="w-20 h-20 bg-accent rounded-full flex items-center justify-center mx-auto mb-4 text-accent-content text-2xl">💰</div>
+                    <h3 class="font-bold text-lg mb-2">Treasurer</h3>
+                    <p class="text-accent font-semibold mb-2">Maria Garcia</p>
+                    <p class="text-sm text-subtle-light">Grade 10</p>
+                </div>
+                
+                <div class="text-center p-6 bg-white dark:bg-neutral rounded-xl shadow-md">
+                    <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 text-white text-2xl">📢</div>
+                    <h3 class="font-bold text-lg mb-2">Secretary</h3>
+                    <p class="text-green-600 font-semibold mb-2">David Kim</p>
+                    <p class="text-sm text-subtle-light">Grade 9</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <h3 class="text-2xl font-bold mb-6">Student Government Initiatives</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-4 bg-primary/10 rounded-lg">
+                        <h4 class="font-semibold text-primary mb-2">Environmental Club</h4>
+                        <p class="text-sm text-subtle-light">Promoting sustainability and eco-friendly practices</p>
+                    </div>
+                    <div class="p-4 bg-secondary/10 rounded-lg">
+                        <h4 class="font-semibold text-secondary mb-2">Peer Tutoring</h4>
+                        <p class="text-sm text-subtle-light">Student-led academic support and mentoring</p>
+                    </div>
+                    <div class="p-4 bg-accent/10 rounded-lg">
+                        <h4 class="font-semibold text-accent mb-2">Community Service</h4>
+                        <p class="text-sm text-subtle-light">Volunteer programs and social responsibility</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="py-20 px-5 md:px-20 lg:px-40 bg-base-100">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-heading font-bold text-foreground-light dark:text-foreground-dark sm:text-4xl">What Students Say</h2>
+                <p class="mt-4 text-lg text-subtle-light dark:text-subtle-dark">Hear from our amazing students</p>
+            </div>
+            
+            <div id="testimonials-container" class="testimonials-slider">
+                <!-- Testimonials will be populated by JavaScript -->
+            </div>
+            
+            <div id="testimonial-dots" class="flex justify-center mt-8">
+                <!-- Dots will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="border-t border-primary/20 px-5 py-10 text-center md:px-20 lg:px-40 bg-base-100 dark:bg-neutral">
+    <div class="flex flex-col items-center justify-between gap-8 md:flex-row">
+        <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
+            <a class="text-sm text-subtle-light dark:text-subtle-dark transition-colors hover:text-primary" href="#">Privacy Policy</a>
+            <a class="text-sm text-subtle-light dark:text-subtle-dark transition-colors hover:text-primary" href="#">Terms of Service</a>
+            <a class="text-sm text-subtle-light dark:text-subtle-dark transition-colors hover:text-primary" href="#">Contact Us</a>
+        </div>
+        <p class="text-sm text-subtle-light dark:text-subtle-dark">© 2023 Florida English Academy. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- COMPLETE JAVASCRIPT -->
+<script src="main.js"></script>
+
+<!-- Student Testimonials -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const studentTestimonials = [
+        {
+            quote: "Being part of Star House has taught me leadership skills and the importance of teamwork. The house system creates such a strong sense of community!",
+            name: "Sarah Johnson",
+            role: "Grade 12, Star House Captain"
+        },
+        {
+            quote: "The drama club has given me confidence I never knew I had. Performing on stage has been one of the best experiences of my school life.",
+            name: "Ahmed Ali",
+            role: "Grade 11, Drama Club Member"
+        },
+        {
+            quote: "Student government has taught me how to organize events and work with different people. It's preparing me for real-world leadership.",
+            name: "Maria Garcia",
+            role: "Grade 10, Student Secretary"
+        },
+        {
+            quote: "The science club competitions are amazing! We get to work on real projects and present them to judges. It's like being a real scientist.",
+            name: "David Kim",
+            role: "Grade 9, Science Club Member"
+        }
+    ];
+
+    const testimonialsContainer = document.getElementById('testimonials-container');
+    const dotsContainer = document.getElementById('testimonial-dots');
+    let currentTestimonial = 0;
+
+    function renderTestimonials() {
+        testimonialsContainer.innerHTML = studentTestimonials.map((testimonial, index) => `
+            <div class="testimonial-item ${index === currentTestimonial ? 'active' : ''} p-8 bg-white dark:bg-neutral rounded-xl shadow-lg text-center">
+                <p class="text-lg italic mb-6 text-subtle-light dark:text-subtle-dark">"${testimonial.quote}"</p>
+                <div class="font-semibold text-primary text-lg">${testimonial.name}</div>
+                <div class="text-sm text-subtle-light">${testimonial.role}</div>
+            </div>
+        `).join('');
+
+        dotsContainer.innerHTML = studentTestimonials.map((_, index) => `
+            <button class="w-3 h-3 rounded-full mx-1 transition-colors ${
+                index === currentTestimonial ? 'bg-primary' : 'bg-gray-300'
+            }" onclick="showTestimonial(${index})"></button>
+        `).join('');
+    }
+
+    window.showTestimonial = function(index) {
+        currentTestimonial = index;
+        renderTestimonials();
+    };
+
+    // Auto-rotate testimonials
+    setInterval(() => {
+        currentTestimonial = (currentTestimonial + 1) % studentTestimonials.length;
+        renderTestimonials();
+    }, 5000);
+
+    renderTestimonials();
+});
+</script>
+
+</body>
+</html>

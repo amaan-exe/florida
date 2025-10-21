@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>About Us - Florida English Academy</title>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <!-- GSAP for Animations -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        display: ["Public Sans"],
+                    },
+                    borderRadius: { 
+                        DEFAULT: "0.25rem", 
+                        lg: "0.5rem", 
+                        xl: "0.75rem", 
+                        full: "9999px" 
+                    },
+                },
+            },
+        };
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .animation-delay-200 { animation-delay: 0.2s; }
+            .animation-delay-400 { animation-delay: 0.4s; }
+            .animation-delay-600 { animation-delay: 0.6s; }
+            .animation-delay-800 { animation-delay: 0.8s; }
+            
+            .reveal {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .reveal.revealed {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            .hover-lift {
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .hover-lift:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+        }
+    </style>
+</head>
+
+<body class="font-display">
+    <div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden text-stone-800 dark:text-stone-200">
+        <div class="layout-container flex h-full grow flex-col">
+            
+            <!-- HEADER -->
+            <header class="flex items-center justify-between whitespace-nowrap border-b border-stone-200/80 dark:border-stone-800/80 px-10 py-4 shadow-sm">
+                <div class="flex items-center gap-3 text-stone-900 dark:text-white">
+                    <div class="w-8 h-8 text-primary">
+                        <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.8261 30.5736C16.7203 29.8826 20.2244 29.4783 24 29.4783C27.7756 29.4783 31.2797 29.8826 34.1739 30.5736C36.9144 31.2278 39.9967 32.7669 41.3563 33.8352L24.8486 7.36089C24.4571 6.73303 23.5429 6.73303 23.1514 7.36089L6.64374 33.8352C8.00331 32.7669 11.0856 31.2278 13.8261 30.5736Z" fill="currentColor"></path>
+                            <path clip-rule="evenodd" d="M39.998 35.764C39.9944 35.7463 39.9875 35.7155 39.9748 35.6706C39.9436 35.5601 39.8949 35.4259 39.8346 35.2825C39.8168 35.2403 39.7989 35.1993 39.7813 35.1602C38.5103 34.2887 35.9788 33.0607 33.7095 32.5189C30.9875 31.8691 27.6413 31.4783 24 31.4783C20.3587 31.4783 17.0125 31.8691 14.2905 32.5189C12.0012 33.0654 9.44505 34.3104 8.18538 35.1832C8.17384 35.2075 8.16216 35.233 8.15052 35.2592C8.09919 35.3751 8.05721 35.4886 8.02977 35.589C8.00356 35.6848 8.00039 35.7333 8.00004 35.7388C8.00004 35.739 8 35.7393 8.00004 35.7388C8.00004 35.7641 8.0104 36.0767 8.68485 36.6314C9.34546 37.1746 10.4222 37.7531 11.9291 38.2772C14.9242 39.319 19.1919 40 24 40C28.8081 40 33.0758 39.319 36.0709 38.2772C37.5778 37.7531 38.6545 37.1746 39.3151 36.6314C39.9006 36.1499 39.9857 35.8511 39.998 35.764ZM4.95178 32.7688L21.4543 6.30267C22.6288 4.4191 25.3712 4.41909 26.5457 6.30267L43.0534 32.777C43.0709 32.8052 43.0878 32.8338 43.104 32.8629L41.3563 33.8352C43.104 32.8629 43.1038 32.8626 43.104 32.8629L43.1051 32.865L43.1065 32.8675L43.1101 32.8739L43.1199 32.8918C43.1276 32.906 43.1377 32.9246 43.1497 32.9473C43.1738 32.9925 43.2062 33.0545 43.244 33.1299C43.319 33.2792 43.4196 33.489 43.5217 33.7317C43.6901 34.1321 44 34.9311 44 35.7391C44 37.4427 43.003 38.7775 41.8558 39.7209C40.6947 40.6757 39.1354 41.4464 37.385 42.0552C33.8654 43.2794 29.133 44 24 44C18.867 44 14.1346 43.2794 10.615 42.0552C8.86463 41.4464 7.30529 40.6757 6.14419 39.7209C4.99695 38.7775 3.99999 37.4427 3.99999 35.7391C3.99999 34.8725 4.29264 34.0922 4.49321 33.6393C4.60375 33.3898 4.71348 33.1804 4.79687 33.0311C4.83898 32.9556 4.87547 32.8935 4.9035 32.8471C4.91754 32.8238 4.92954 32.8043 4.93916 32.7889L4.94662 32.777L4.95178 32.7688ZM35.9868 29.004L24 9.77997L12.0131 29.004C12.4661 28.8609 12.9179 28.7342 13.3617 28.6282C16.4281 27.8961 20.0901 27.4783 24 27.4783C27.9099 27.4783 31.5719 27.8961 34.6383 28.6282C35.082 28.7342 35.5339 28.8609 35.9868 29.004Z" fill="currentColor" fill-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-bold">Florida English Academy</h2>
+                </div>
+                <div class="flex flex-1 justify-end gap-8">
+                    <nav class="flex items-center gap-6">
+                        <a class="text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
+                        <a class="text-sm font-medium hover:text-primary transition-colors" href="academics.html">Academics</a>
+                        <a class="text-sm font-medium hover:text-primary transition-colors" href="addmissions.html">Admissions</a>
+                        <a class="text-sm font-medium hover:text-primary transition-colors" href="student-life.html">Student Life</a>
+                        <a class="text-sm font-medium hover:text-primary transition-colors" href="index.html#gallery">Gallery</a>
+                        <a class="text-sm font-bold text-primary" href="about.html">About Us</a>
+                    </nav>
+                    <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 bg-primary text-white text-sm font-bold shadow-sm hover:bg-primary/90 transition-colors">
+                        <span class="truncate">Apply Now</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- MAIN CONTENT -->
+            <main class="flex-1 px-4 py-12 sm:px-6 lg:px-8">
+                <div class="mx-auto max-w-5xl">
+                    
+                    <!-- HERO SECTION -->
+                    <div class="text-center mb-12">
+                        <h1 class="text-4xl font-black tracking-tight text-stone-900 dark:text-white sm:text-5xl lg:text-6xl reveal">
+                            About
+                            <span class="text-primary">Florida English Academy</span>
+                        </h1>
+                        <p class="mt-6 text-lg max-w-3xl mx-auto text-stone-600 dark:text-stone-400 reveal animation-delay-200">
+                            On the auspicious day of 1st April 2010, Florida English Academy was established to provide education to students. The credit goes to respected Adiba Saoban who worked shoulder to shoulder with us to give a leading shape to this institution what it is today.
+                        </p>
+                    </div>
+
+                    <div class="space-y-16">
+                        
+                        <!-- MISSION & VALUES SECTION -->
+                        <section class="reveal animation-delay-400">
+                            <h2 class="text-3xl font-bold tracking-tight text-stone-900 dark:text-white mb-6">Our Mission & Values</h2>
+                            <div class="grid md:grid-cols-2 gap-8 text-stone-600 dark:text-stone-400">
+                                <p class="text-base leading-relaxed">
+                                    Our mission is to provide easy and perfect education to all. We believe in fostering a culture of curiosity, collaboration, and critical thinking, preparing students to become innovative leaders and compassionate global citizens.
+                                </p>
+                                <div class="prose prose-blue dark:prose-invert">
+                                    <p>At Florida English Academy, we are guided by core values that shape our educational philosophy and daily interactions. These values include:</p>
+                                    <ul class="text-base">
+                                        <li>
+                                            <strong>Excellence:</strong>
+                                            Striving for the highest standards in teaching, learning, and personal growth.
+                                        </li>
+                                        <li>
+                                            <strong>Integrity:</strong>
+                                            Upholding honesty, respect, and ethical conduct in all endeavors.
+                                        </li>
+                                        <li>
+                                            <strong>Community:</strong>
+                                            Building a supportive and inclusive environment where every member feels connected and valued.
+                                        </li>
+                                        <li>
+                                            <strong>Innovation:</strong>
+                                            Embracing creativity, new ideas, and continuous improvement.
+                                        </li>
+                                        <li>
+                                            <strong>Compassion:</strong>
+                                            Nurturing empathy, kindness, and a commitment to serving others.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- HISTORY SECTION -->
+                        <section class="reveal animation-delay-600">
+                            <h2 class="text-3xl font-bold tracking-tight text-stone-900 dark:text-white mb-6">Our History</h2>
+                            <p class="text-base leading-relaxed text-stone-600 dark:text-stone-400">
+                                Founded on 1st April 2010, Florida English Academy has been providing quality education to students. The credit goes to respected Adiba Saoban who worked shoulder to shoulder with us to give a leading shape to this institution what it is today. Our next step shall be for affiliation.
+                            </p>
+                        </section>
+
+                        <!-- TEAM SECTION -->
+                        <section class="reveal animation-delay-800">
+                            <h2 class="text-3xl font-bold tracking-tight text-center text-stone-900 dark:text-white mb-10">Our Team</h2>
+                            
+                            <!-- LEADERSHIP -->
+                            <div>
+                                <h3 class="text-2xl font-bold text-primary mb-8 text-center">Leadership</h3>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 justify-items-center">
+                                    <div class="flex flex-col items-center text-center group hover-lift">
+                                        <div class="relative w-40 h-40">
+                                            <div class="w-full h-full rounded-full bg-cover bg-center shadow-lg transform transition-transform duration-500 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAuDsPDQkYHwJuXUJg38Qp8dH5744wLYEL_bAHCabqSWtCPC48eQQVbFipVKj5cnmw7uAxaK3IWS8EBn21YazZM4lYAxB4bYIuWhAJvXq_R-PLKRx5Pz1mBuo7SGlyrPuO8uZkpu32-m5YSPm67C9vEibVNfafyX48-T2KNxMhSExdHoueDhafhdnMjjlmMqNJ4Ia35JYOqEREs2nFuBZmybgarsruVu5B3QCuAgjJQ5-6qEwo0pE2mnBDj0F_JF_50MGW81uzzVzU");'></div>
+                                        </div>
+                                        <div class="mt-4">
+                                            <p class="text-lg font-bold text-stone-900 dark:text-white">Tahir Saoban</p>
+                                            <p class="text-sm text-primary font-medium">Director</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-center text-center group hover-lift">
+                                        <div class="relative w-40 h-40">
+                                            <div class="w-full h-full rounded-full bg-cover bg-center shadow-lg transform transition-transform duration-500 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDHavsqoLSPR0NwbkHgNd6cJFkAbiNLTozM1b_2D2hjyh7L2_g1RTVMWp_PmKNYfdotaJVGlKJbjsknqmc3NTPHm0M1YQYMA0uYSA1fe6svl4-uajdBFPL4qhIokoTCcEym1UOdu37W8bTQVsizMQkpZ-H7wMgQ7zTy9T1DNN-M3I-aWmrm5D3v9yJW7505_QeQAXR8v_VqL0lXQGzKGeWfYp9liWll-xcsGiGNgLtkKApRm1sVNIcY0QGis9w_O3SShT6Zwwu0SJs");'></div>
+                                        </div>
+                                        <div class="mt-4">
+                                            <p class="text-lg font-bold text-stone-900 dark:text-white">Nazir Mannan</p>
+                                            <p class="text-sm text-primary font-medium">Vice Principal</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-center text-center group hover-lift">
+                                        <div class="relative w-40 h-40">
+                                            <div class="w-full h-full rounded-full bg-cover bg-center shadow-lg transform transition-transform duration-500 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA0KgKZWBxSrfMLQdJZtRByXP6RSn3xXGC7LYzpkslAkxvHsAMMbU-u2XrH43eODOyngfZfxhf4yTsibuiV0cQ9wHnS0uAIu2FaLaytS4A4Pc4HtmFB51QIA2E2lPQMw8ssfu9Cj2ywPw3qwSSx4wIfB0Ec4xubJjz6tbiLsXEf43_JqRy8XieVfmfbMlw8ooaXnLt_4GUSjBfW1reVP9QhMpm9b4SSWPrczLtW2COfRJFwhX7atUqfJIKZGS9YVUwEkGCz9xvV6GM");'></div>
+                                        </div>
+                                        <div class="mt-4">
+                                            <p class="text-lg font-bold text-stone-900 dark:text-white">Ishteyaq Imam</p>
+                                            <p class="text-sm text-primary font-medium">President (M.Sc, B.Ed.)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FACULTY -->
+                            <div class="mt-16">
+                                <h3 class="text-2xl font-bold text-primary mb-8 text-center">Faculty</h3>
+                                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12">
+                                    <div class="flex flex-col items-center text-center group hover-lift">
+                                        <div class="relative w-32 h-32">
+                                            <div class="w-full h-full rounded-full bg-cover bg-center shadow-md transform transition-transform duration-500 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBdStURlIAuq5yiUk_28hVPQsTIg7X3Ww1kqhDdrbUqVyl4NPDm4g1MpeB5AkdftFd_DT0cntc5jUjfb_PTxQICe7dEK8LSgw4_mTSpgUIpq8On8D1W14um4KtDpxj-63iJrKP7LUp9_Y5N4r2aNGzs9QrB-FQwTTd3WFdtJboM27wuoZgkB4zQwk9HXJ013eWJtytWF6XhfT5m6PGt1b3ZRRwCXIZbYoXnkAWtR4KQ1vHYw9mS590ZJDemwsKQ5ECPcfhANdBxE4w");'></div>
+                                        </div>
+                                        <div class="mt-4">
+                                            <p class="font-bold text-stone-800 dark:text-stone-200">Professor Ethan Walker</p>
+                                            <p class="text-sm text-stone-500 dark:text-stone-400">English Department</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-center text-center group hover-lift">
+                                        <div class="relative w-32 h-32">
+                                            <div class="w-full h-full rounded-full bg-cover bg-center shadow-md transform transition-transform duration-500 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDUukpssVHeHracY6OFXMx9_Li3PmBB-rIi-2x1hIjxTi51XqKBslYVqfFuwqjrdqNz4IICyA_Ld7YFFfqCUB2e8akiiibJ0mKoofIEhMxlSUNR9uOMUat0w69bOSx2jEBckEi-A9T5lpjHGPO9D-YnTSP99U4vXkjcIi-_i-FGLrraAEg_93Yj6lNfZZoMptV2qijDmhzWu9ZC16-qX2abcKZ2yH7HxGURYUMzB8rC1dyWLRdw29RTxG8udEzEy8wR5sOpK8vOtTM");'></div>
+                                        </div>
+                                        <div class="mt-4">
+                                            <p class="font-bold text-stone-800 dark:text-stone-200">Professor Sophia Hayes</p>
+                                            <p class="text-sm text-stone-500 dark:text-stone-400">Science Department</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-center text-center group hover-lift">
+                                        <div class="relative w-32 h-32">
+                                            <div class="w-full h-full rounded-full bg-cover bg-center shadow-md transform transition-transform duration-500 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDRjlKGEI8YBWSBG8yXmekOhUXrbIlBghijCOLm2v3CwF_7wqbfkms7NMthGqNuF8FOQVCGD1PGoXGNB5Vm2-EHDM8KN3Su9uPOoc3FzHC2ckPVVbXnFGUQDAolybgVYeY94t7lqDxdnAqxLUdxa2zVLCi1IDtOxZrHFTqxpASt_eBuVRmq7XhTeC426xIUoFoU8_s4xouQ7q3uP5L4LsCXIyE6Imgx72uFscJtDPr7fV-1kruK-_Odw-SzLtSB9S4tS2_3T46RW7w");'></div>
+                                        </div>
+                                        <div class="mt-4">
+                                            <p class="font-bold text-stone-800 dark:text-stone-200">Professor Liam Foster</p>
+                                            <p class="text-sm text-stone-500 dark:text-stone-400">Mathematics Department</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-center text-center group hover-lift">
+                                        <div class="relative w-32 h-32">
+                                            <div class="w-full h-full rounded-full bg-cover bg-center shadow-md transform transition-transform duration-500 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA_ysuus_xqGKU7-RCJDNwSxp_TuOM03Ai-S0dmjwQkVqsw9li4-cB_2H6wJAzwqbndJRmtYYrTfl3N7KHAc9vYZw8qVDg3ZwywEmSvi4Pk1-SqRYGo1lJq2pC5ejjfNHlCgRNelg5h7L5JR1_gCBwhaOVsHN1JI_lodOIapDGtQWaKofhA6tBOOpe7SzCPQ3ValcmcMFZ-T6b4WBalGEtRVP-teHrpLAfw25mRddQkvWAubHx3Qse0GYpe_FA2tODuA2j2zhk_X08");'></div>
+                                        </div>
+                                        <div class="mt-4">
+                                            <p class="font-bold text-stone-800 dark:text-stone-200">Professor Ava Morgan</p>
+                                            <p class="text-sm text-stone-500 dark:text-stone-400">Arts Department</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-center text-center group hover-lift">
+                                        <div class="relative w-32 h-32">
+                                            <div class="w-full h-full rounded-full bg-cover bg-center shadow-md transform transition-transform duration-500 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD3QgwWi3IlBhirLfGulP5OZABW70ou0dZse_I-4PsHthNTRM3b6rLY6d_hJXvhXve3tpbL6OCupZgx7YwyBPZxYzfk0SIuClJAnlMi8Ikfar1JF68W7OkZXovbYwlDZlVXjdA1lsul6LkYsBb4JUeYmGfQDYRMjB0N0Zd3IIM-942l7_PweYGiW9ZQu0dOT5buPq1vocv5KzwzFtDNbnHolndJdWCvBbVDbue03ytAkcXAfI6DSqXnnTuU_dnxA0QejPan7cFOpVE");'></div>
+                                        </div>
+                                        <div class="mt-4">
+                                            <p class="font-bold text-stone-800 dark:text-stone-200">Professor Noah Cooper</p>
+                                            <p class="text-sm text-stone-500 dark:text-stone-400">History Department</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-center text-center group hover-lift">
+                                        <div class="relative w-32 h-32">
+                                            <div class="w-full h-full rounded-full bg-cover bg-center shadow-md transform transition-transform duration-500 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBwjTLeYHevoyoo-5SD_SZQ14ozym4HUVXNwak9aYi3HuxzrJoAILGTKmDg4mfqXuScnrQ0MgaK_rOY23pw7Z38rmMkrfonThA2R_JOBln3uIGueMt_paU3xUdoMtmA5Bc8ASbVF2VUJ1i-HDh7LIbjQQgLb0wIge4NNRKYo1LXIlYfF9MX8XYV16XvxaWbod-fmW9ZztpSxqfxjsbBk-fvChpoqxOdvyBokC8ShczcqdtUoZxiKK86lX87MaiRU1wtHpjdc86Mj_8");'></div>
+                                        </div>
+                                        <div class="mt-4">
+                                            <p class="font-bold text-stone-800 dark:text-stone-200">Professor Isabella Reed</p>
+                                            <p class="text-sm text-stone-500 dark:text-stone-400">Languages Department</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- JavaScript for Animations -->
+    <script>
+        // Initialize GSAP animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Reveal animations on scroll
+        gsap.utils.toArray('.reveal').forEach((element, index) => {
+            gsap.fromTo(element, 
+                { opacity: 0, y: 30, scale: 0.95 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 0.8,
+                    ease: "power2.out",
+                    delay: index * 0.1,
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 85%",
+                        end: "bottom 15%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+
+        // Team member hover animations
+        document.querySelectorAll('.group').forEach(member => {
+            member.addEventListener('mouseenter', () => {
+                gsap.to(member.querySelector('div'), { 
+                    duration: 0.3, 
+                    scale: 1.05, 
+                    ease: "power2.out"
+                });
+            });
+            
+            member.addEventListener('mouseleave', () => {
+                gsap.to(member.querySelector('div'), { 
+                    duration: 0.3, 
+                    scale: 1, 
+                    ease: "power2.out"
+                });
+            });
+        });
+
+        // Apply Now button functionality
+        document.querySelector('button').addEventListener('click', () => {
+            window.location.href = 'addmissions.html';
+        });
+    </script>
+</body>
+</html>

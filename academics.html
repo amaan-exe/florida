@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+    <link as="style" href="https://fonts.googleapis.com/css2?display=swap&family=Public+Sans:wght@400;500;700;900&family=Chewy" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <title>Florida English Academy - Academics</title>
+    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <!-- GSAP for Animations -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+    
+    <style type="text/tailwindcss">
+        :root {
+            --primary-color: #4092f8;
+            --accent-gold: #ffd700;
+        }
+        .font-chewy {
+            font-family: 'Chewy', cursive;
+        }
+        
+        @layer utilities {
+            .animation-delay-200 { animation-delay: 0.2s; }
+            .animation-delay-400 { animation-delay: 0.4s; }
+            .animation-delay-600 { animation-delay: 0.6s; }
+            .animation-delay-800 { animation-delay: 0.8s; }
+            
+            .reveal {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .reveal.revealed {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            .hover-lift {
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .hover-lift:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+        }
+    </style>
+    
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "var(--primary-color)",
+                        "accent-gold": "var(--accent-gold)",
+                        "background-light": "#f0f9ff",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        display: ["Public Sans"],
+                        heading: ["Chewy", "cursive"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        lg: "1rem",
+                        xl: "1.5rem",
+                        "2xl": "2rem",
+                        full: "9999px",
+                    },
+                    boxShadow: {
+                        'fun': '0 10px 20px -5px rgba(64, 146, 248, 0.4)',
+                    }
+                },
+            },
+        };
+    </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-slate-200">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            
+            <!-- HEADER -->
+            <header class="flex items-center justify-between whitespace-nowrap border-b border-blue-200/80 dark:border-slate-800/80 px-10 py-4 shadow-sm bg-white dark:bg-background-dark">
+                <div class="flex items-center gap-3 text-slate-900 dark:text-white">
+                    <div class="text-primary size-10">
+                        <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.8261 30.5736C16.7203 29.8826 20.2244 29.4783 24 29.4783C27.7756 29.4783 31.2797 29.8826 34.1739 30.5736C36.9144 31.2278 39.9967 32.7669 41.3563 33.8352L24.8486 7.36089C24.4571 6.73303 23.5429 6.73303 23.1514 7.36089L6.64374 33.8352C8.00331 32.7669 11.0856 31.2278 13.8261 30.5736Z" fill="currentColor"></path>
+                            <path clip-rule="evenodd" d="M39.998 35.764C39.9944 35.7463 39.9875 35.7155 39.9748 35.6706C39.9436 35.5601 39.8949 35.4259 39.8346 35.2825C39.8168 35.2403 39.7989 35.1993 39.7813 35.1602C38.5103 34.2887 35.9788 33.0607 33.7095 32.5189C30.9875 31.8691 27.6413 31.4783 24 31.4783C20.3587 31.4783 17.0125 31.8691 14.2905 32.5189C12.0012 33.0654 9.44505 34.3104 8.18538 35.1832C8.17384 35.2075 8.16216 35.233 8.15052 35.2592C8.09919 35.3751 8.05721 35.4886 8.02977 35.589C8.00356 35.6848 8.00039 35.7333 8.00004 35.7388C8.00004 35.739 8 35.7393 8.00004 35.7388C8.00004 35.7641 8.0104 36.0767 8.68485 36.6314C9.34546 37.1746 10.4222 37.7531 11.9291 38.2772C14.9242 39.319 19.1919 40 24 40C28.8081 40 33.0758 39.319 36.0709 38.2772C37.5778 37.7531 38.6545 37.1746 39.3151 36.6314C39.9006 36.1499 39.9857 35.8511 39.998 35.764ZM4.95178 32.7688L21.4543 6.30267C22.6288 4.4191 25.3712 4.41909 26.5457 6.30267L43.0534 32.777C43.0709 32.8052 43.0878 32.8338 43.104 32.8629L41.3563 33.8352C43.104 32.8629 43.1038 32.8626 43.104 32.8629L43.1051 32.865L43.1065 32.8675L43.1101 32.8739L43.1199 32.8918C43.1276 32.906 43.1377 32.9246 43.1497 32.9473C43.1738 32.9925 43.2062 33.0545 43.244 33.1299C43.319 33.2792 43.4196 33.489 43.5217 33.7317C43.6901 34.1321 44 34.9311 44 35.7391C44 37.4427 43.003 38.7775 41.8558 39.7209C40.6947 40.6757 39.1354 41.4464 37.385 42.0552C33.8654 43.2794 29.133 44 24 44C18.867 44 14.1346 43.2794 10.615 42.0552C8.86463 41.4464 7.30529 40.6757 6.14419 39.7209C4.99695 38.7775 3.99999 37.4427 3.99999 35.7391C3.99999 34.8725 4.29264 34.0922 4.49321 33.6393C4.60375 33.3898 4.71348 33.1804 4.79687 33.0311C4.83898 32.9556 4.87547 32.8935 4.9035 32.8471C4.91754 32.8238 4.92954 32.8043 4.93916 32.7889L4.94662 32.777L4.95178 32.7688ZM35.9868 29.004L24 9.77997L12.0131 29.004C12.4661 28.8609 12.9179 28.7342 13.3617 28.6282C16.4281 27.8961 20.0901 27.4783 24 27.4783C27.9099 27.4783 31.5719 27.8961 34.6383 28.6282C35.082 28.7342 35.5339 28.8609 35.9868 29.004Z" fill="currentColor" fill-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-slate-900 dark:text-white text-2xl font-bold font-heading">Florida English Academy</h2>
+                </div>
+                <div class="flex flex-1 justify-end items-center gap-6">
+                    <nav class="hidden md:flex items-center gap-6">
+                        <a class="text-slate-600 dark:text-slate-300 font-medium hover:text-primary dark:hover:text-primary transition-colors" href="index.html">Home</a>
+                        <a class="text-slate-600 dark:text-slate-300 font-medium hover:text-primary dark:hover:text-primary transition-colors" href="about.html">About</a>
+                        <a class="text-primary font-bold" href="academics.html">Academics</a>
+                        <a class="text-slate-600 dark:text-slate-300 font-medium hover:text-primary dark:hover:text-primary transition-colors" href="addmissions.html">Admissions</a>
+                        <a class="text-slate-600 dark:text-slate-300 font-medium hover:text-primary dark:hover:text-primary transition-colors" href="student-life.html">Student Life</a>
+                        <a class="text-slate-600 dark:text-slate-300 font-medium hover:text-primary dark:hover:text-primary transition-colors" href="index.html#gallery">News & Events</a>
+                    </nav>
+                    <div class="flex items-center gap-4">
+                        <button class="flex min-w-[96px] items-center justify-center rounded-full h-12 px-6 bg-accent-gold text-slate-900 font-bold tracking-wide hover:bg-accent-gold/90 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                            <span>Apply Now</span>
+                        </button>
+                        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12 border-2 border-accent-gold" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDwgdouhou8aazSB7_KbtErxKiHQutfpZv2UVAocYo4atLexiMwxvbQgxwgWiCTP2tiOe3S-g25hBkkazOdKRRBOpZAAAIgHKRvlmaYSLP_ynGt8O3xIAjG04IzKSxDngG0jO0W_E2F1kvmGI7q9xSBUNsvHbMJheTZkkoDAbzljbfSQF4HnI5oHd8TDSTFc6mMbj6jAqslstmXMWW667qkDKJ-i0lPoQbWdFEr-NC2zL1D6OOhHi9p6eO4uznCt15dItesnMdz9rc");'></div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- MAIN CONTENT -->
+            <main class="flex-1 px-4 sm:px-6 lg:px-8 py-10">
+                <div class="max-w-6xl mx-auto">
+                    
+                    <!-- HERO SECTION -->
+                    <div class="relative bg-cover bg-center flex flex-col justify-end items-center text-center overflow-hidden rounded-2xl min-h-[400px] shadow-fun p-8 reveal" style='background-image: linear-gradient(0deg, rgba(64, 146, 248, 0.7) 0%, rgba(64, 146, 248, 0.1) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuD6CNLIrR6eAaxjMjtNF2eZ4YWPVAzbgmX8iM4sqhmmWy6Yr4kNp9nU4SpW1K58LVdla3jvwS4i64gEaF2obeuji9iPXviwFTLBS0HQM9E2_540_fMUdYEWCATaht7ZR7R08zmjWM-R28jReCq5JLNsKSwzfdVOIn4B2aQb5Y5PpWeUMe9GkXVjg5TepEHyVaV9ZYyKH_-VQyF3yLjtiOZ5e_iARSWJjFsnX09N1jTwRhUHfDNOlG9t-HECsKyHH3Te7AZpMngV7w0");'>
+                        <h1 class="text-white text-7xl font-heading tracking-wide drop-shadow-lg">Our Learning Adventure!</h1>
+                    </div>
+
+                    <!-- ACADEMIC PROGRAMS SECTION -->
+                    <section class="py-16 reveal animation-delay-200">
+                        <h2 class="text-5xl font-heading text-slate-900 dark:text-white mb-6 text-center text-primary">Awesome Academic Programs</h2>
+                        <p class="text-slate-600 dark:text-slate-300 text-xl text-center leading-relaxed mb-12 max-w-3xl mx-auto">
+                            Get ready for an exciting journey at Florida English Academy! Our classes are super fun and made just for you. We mix cool lessons with amazing adventures to make learning the best part of your day!
+                        </p>
+                        <div class="grid md:grid-cols-3 gap-10">
+                            <div class="group bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border-4 border-transparent hover:border-accent-gold transition-all duration-300 transform hover:-translate-y-2 hover-lift">
+                                <img alt="Lower School Cartoon" class="w-32 h-32 mx-auto mb-4 transition-transform duration-300 group-hover:rotate-[-10deg] group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzaBxNeEO4qtAD3cFlQXSd-u1ztSlwbbq5KkAttHEEnAuNcWZ_IXKgfG-H54IQ1UgEz6wpOE90Pebfd0EfzPx8uDfuYlUNAz_i9zK7ffVLEUwPTsUf6rlYIoKX2diE_5gaup6OzfdDh4MTRh2k0RugjFx5DpyIxy_I0ISpC8LWb2GCapsds61yVlZMQ8FwnooILThVup25wkaYfWpjyyUyta-tFrq62OtYam6WFmLlpRgsvimKCZsaAeq9Qh4iNLEfhxRl6zxKl5U"/>
+                                <h3 class="text-3xl font-heading text-primary dark:text-blue-300 mb-2">Little Learners</h3>
+                                <p class="text-slate-500 dark:text-slate-400 font-semibold mb-3">(Grades K-5)</p>
+                                <p class="text-slate-600 dark:text-slate-300">
+                                    Jump into a world of stories, numbers, and discovery! We play games, create art, and learn new things every day.
+                                </p>
+                            </div>
+                            <div class="group bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border-4 border-transparent hover:border-accent-gold transition-all duration-300 transform hover:-translate-y-2 hover-lift">
+                                <img alt="Middle School Cartoon" class="w-32 h-32 mx-auto mb-4 transition-transform duration-300 group-hover:rotate-[5deg] group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMumOZBw9Yth5fylMmB17lKGHUP6PMIVahV4gFW2ftAjuosZWX4m4tfbF5T9eEmlrKviMDs0nspPOJDKWDapfmdz8HDV7JvaW3AzJ_nfzW2aSkHUQCY_EOc_nzLuqDWxF1YZi5RSmiMX5-QMw3twhtKdLKvjSf2T_Ak7s3StGq4NNU0S9SnkQ4ufN-IP4Jhutq2cxYKCLX_zjC3YkhdIoegKIUqgJenyouUFwsPdk2xB56ylH8_1X3YT5fJASJRxxJLXH_PmuRc88"/>
+                                <h3 class="text-3xl font-heading text-primary dark:text-blue-300 mb-2">Middle Explorers</h3>
+                                <p class="text-slate-500 dark:text-slate-400 font-semibold mb-3">(Grades 6-8)</p>
+                                <p class="text-slate-600 dark:text-slate-300">
+                                    Explore cool subjects like science experiments and ancient history. It's all about teamwork and solving puzzles together!
+                                </p>
+                            </div>
+                            <div class="group bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg border-4 border-transparent hover:border-accent-gold transition-all duration-300 transform hover:-translate-y-2 hover-lift">
+                                <img alt="Upper School Cartoon" class="w-32 h-32 mx-auto mb-4 transition-transform duration-300 group-hover:rotate-[10deg] group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCboGsc5x6lwQYNtTqUKHj4RWw5mAc8s3TYQnFHtY37yMTcbZOyJQ6HeAWpSlzeN38ulCQTVYuqIiXytd03wKNi2690yukUZ0g6tViVTqxHg2fKV4S1B-D8nlAi8qq7IKtO2cVaSKQiNjsaVo12vCVIzKU4ebFdtyqqSeFPStbe1qZXLkT5gpIW50ExEun0A6OHsg5m81al5RwujspzE7CMAvFi84mn2pLpLX-qA3ApjWXMzZcy11XezmoDNf-3G6fPA3gIHilxMw"/>
+                                <h3 class="text-3xl font-heading text-primary dark:text-blue-300 mb-2">Future Leaders</h3>
+                                <p class="text-slate-500 dark:text-slate-400 font-semibold mb-3">(Grades 9-12)</p>
+                                <p class="text-slate-600 dark:text-slate-300">
+                                    Get ready for your next big step! Choose from awesome classes that help you chase your dreams and prepare for college.
+                                </p>
+                </div>
+            </div>
+        </section>
+
+                    <!-- FEATURES SECTION -->
+                    <section class="py-16 reveal animation-delay-400">
+                        <h2 class="text-5xl font-heading text-slate-900 dark:text-white mb-8 text-center text-primary">What's in Our Treasure Chest?</h2>
+                        <div class="space-y-6">
+                            <details class="group bg-white dark:bg-slate-800 p-6 rounded-2xl border-2 border-blue-200 dark:border-slate-700 shadow-md transition-all duration-300 hover-lift" open="">
+                                <summary class="flex cursor-pointer items-center justify-between gap-4 list-none">
+                                    <div class="flex items-center gap-4">
+                                        <div class="bg-primary/20 text-primary p-3 rounded-full"><span class="material-symbols-outlined text-3xl transition-transform duration-300 group-hover:rotate-12">lightbulb</span></div>
+                                        <h4 class="text-2xl font-heading text-slate-800 dark:text-slate-100">Super Fun Teaching</h4>
+                                    </div>
+                                    <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-primary text-4xl">expand_more</span>
+                                </summary>
+                                <p class="mt-4 text-slate-600 dark:text-slate-300 text-lg pl-16">
+                                    We learn by doing! Build cool projects, work with friends on exciting challenges, and get one-on-one help to be your best self. Learning is an adventure, not a lecture!
+                                </p>
+                            </details>
+                            <details class="group bg-white dark:bg-slate-800 p-6 rounded-2xl border-2 border-blue-200 dark:border-slate-700 shadow-md transition-all duration-300 hover-lift">
+                                <summary class="flex cursor-pointer items-center justify-between gap-4 list-none">
+                                    <div class="flex items-center gap-4">
+                                        <div class="bg-primary/20 text-primary p-3 rounded-full"><span class="material-symbols-outlined text-3xl transition-transform duration-300 group-hover:animate-pulse">tablet_mac</span></div>
+                                        <h4 class="text-2xl font-heading text-slate-800 dark:text-slate-100">Tech & Gadgets</h4>
+                                    </div>
+                                    <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-primary text-4xl">expand_more</span>
+                                </summary>
+                                <p class="mt-4 text-slate-600 dark:text-slate-300 text-lg pl-16">
+                                    Our classrooms have awesome tech to make learning even more amazing. Use cool apps and digital tools to explore new worlds and prepare for the future.
+                                </p>
+                            </details>
+                            <details class="group bg-white dark:bg-slate-800 p-6 rounded-2xl border-2 border-blue-200 dark:border-slate-700 shadow-md transition-all duration-300 hover-lift">
+                                <summary class="flex cursor-pointer items-center justify-between gap-4 list-none">
+                                    <div class="flex items-center gap-4">
+                                        <div class="bg-primary/20 text-primary p-3 rounded-full"><span class="material-symbols-outlined text-3xl transition-transform duration-300 group-hover:animate-bounce">palette</span></div>
+                                        <h4 class="text-2xl font-heading text-slate-800 dark:text-slate-100">Art & Sports</h4>
+            </div>
+                                    <span class="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-primary text-4xl">expand_more</span>
+                                </summary>
+                                <p class="mt-4 text-slate-600 dark:text-slate-300 text-lg pl-16">
+                                    Paint, sing, play, and score! Express your creative side in our art studios or join a team to learn about sportsmanship and have fun on the field.
+                                </p>
+                            </details>
+            </div>
+        </section>
+
+                    <!-- PHILOSOPHY SECTION -->
+                    <section class="py-16 bg-gradient-to-br from-primary to-blue-400 dark:from-blue-800 dark:to-blue-900 rounded-2xl px-8 text-white relative overflow-hidden shadow-fun reveal animation-delay-600">
+                        <div class="absolute -top-10 -left-10 size-48 bg-white/20 rounded-full"></div>
+                        <div class="absolute -bottom-16 -right-10 size-64 bg-white/20 rounded-full"></div>
+                        <h2 class="text-5xl font-heading mb-4 text-center relative z-10">Our Big Idea!</h2>
+                        <p class="text-xl leading-relaxed text-center max-w-4xl mx-auto relative z-10">
+                            We believe learning should be full of "wows!" and "ahas!". We're here to help you ask big questions, think up brilliant ideas, and be a kind friend to everyone. Our school is a happy, safe place where you can grow into an amazing, world-changing person!
+                        </p>
+                    </section>
+                </div>
+    </main>
+
+            <!-- FOOTER -->
+            <footer class="bg-white dark:bg-slate-900 border-t border-blue-200/80 dark:border-slate-800/80">
+                <div class="max-w-5xl mx-auto px-5 py-10 text-center">
+                    <div class="flex flex-wrap items-center justify-center gap-6 mb-4">
+                        <a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary" href="#">Privacy Policy</a>
+                        <a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary" href="#">Terms of Service</a>
+                        <a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary" href="index.html#contact">Contact Us</a>
+                    </div>
+                    <p class="text-slate-500 dark:text-slate-400">© 2023 Florida English Academy. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- JavaScript for Animations -->
+    <script>
+        // Initialize GSAP animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Reveal animations on scroll
+        gsap.utils.toArray('.reveal').forEach((element, index) => {
+            gsap.fromTo(element, 
+                { opacity: 0, y: 30, scale: 0.95 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 0.8,
+                    ease: "power2.out",
+                    delay: index * 0.1,
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 85%",
+                        end: "bottom 15%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+
+        // Card hover animations
+        document.querySelectorAll('.group').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                gsap.to(card, { 
+                    duration: 0.3, 
+                    y: -5, 
+                    scale: 1.02,
+                    ease: "power2.out"
+                });
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, { 
+                    duration: 0.3, 
+                    y: 0, 
+                    scale: 1,
+                    ease: "power2.out"
+                });
+            });
+        });
+
+        // Apply Now button functionality
+        document.querySelector('button').addEventListener('click', () => {
+            window.location.href = 'addmissions.html';
+        });
+
+        // Details accordion animations
+        document.querySelectorAll('details').forEach(detail => {
+            detail.addEventListener('toggle', () => {
+                if (detail.open) {
+                    gsap.fromTo(detail.querySelector('p'), 
+                        { opacity: 0, height: 0 },
+                        { opacity: 1, height: 'auto', duration: 0.3, ease: "power2.out" }
+                    );
+                }
+            });
+        });
+    </script>
+</body>
+</html>

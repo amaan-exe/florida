@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Florida English Academy</title>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Public+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <!-- GSAP for Animations -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: "class", 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        primary: "#607AFB", "primary-focus": "#e04e4e", "primary-content": "#ffffff", 
+                        secondary: "#ffe66d", "secondary-focus": "#e0cc5f", "secondary-content": "#333333", 
+                        accent: "#4ecdc4", "accent-focus": "#3ba9a2", "accent-content": "#ffffff", 
+                        neutral: "#333333", "neutral-focus": "#1a1a1a", "neutral-content": "#ffffff", 
+                        "base-100": "#f7fcfd", "base-200": "#e0f7fa", "base-300": "#b2ebf2", "base-content": "#333333", 
+                        info: "#3abff8", success: "#36d399", warning: "#fbbd23", error: "#f87272", 
+                        "background-light": "#f5f6f8", "background-dark": "#0f1323", 
+                        "foreground-light": "#333333", "foreground-dark": "#ffffff", 
+                        "subtle-light": "#6b7280", "subtle-dark": "#9ca3af"
+                    }, 
+                    fontFamily: { 
+                        display: "Public Sans", 
+                        heading: ["Gochi Hand", "cursive"] 
+                    }, 
+                    borderRadius: { 
+                        DEFAULT: "1rem", lg: "2rem", xl: "3rem", full: "9999px" 
+                    }, 
+                    keyframes: {
+                        "float-up": {"0%": {transform: "translateY(20px)", opacity: "0"}, "100%": {transform: "translateY(0)", opacity: "1"}}, 
+                        "fade-in": {"0%": {opacity: "0"}, "100%": {opacity: "1"}}, 
+                        wiggle: {"0%, 100%": {transform: "rotate(-3deg)"}, "50%": {transform: "rotate(3deg)"}}, 
+                        "pop-in": {"0%": {transform: "scale(0.8)", opacity: "0"}, "100%": {transform: "scale(1)", opacity: "1"}}
+                    }, 
+                    animation: {
+                        "float-up": "float-up 0.8s ease-out forwards", 
+                        "fade-in": "fade-in 1s ease-out forwards", 
+                        wiggle: "wiggle 1s ease-in-out infinite", 
+                        "pop-in": "pop-in 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards"
+                    }
+                }
+            }
+        };
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .animation-delay-200 { animation-delay: 0.2s; }
+            .animation-delay-400 { animation-delay: 0.4s; }
+            .scribble-underline { position: relative; display: inline-block; }
+            .scribble-underline::after {
+                content: ''; position: absolute; left: 0; bottom: -5px; width: 100%; height: 8px;
+                background-image: url('data:image/svg+xml;utf8,<svg width="100" height="10" viewBox="0 0 100 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8.5C18 3.5 82 2.5 99 7.5" stroke="%23ffe66d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+                background-repeat: no-repeat; background-size: 100% 100%;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-base-content">
+    <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            
+            <!-- HEADER -->
+            <header class="flex items-center justify-between whitespace-nowrap border-b border-primary/20 px-10 py-4 sticky top-0 z-50 bg-base-100/95 backdrop-blur-sm">
+                <div class="flex items-center gap-3 text-foreground-light dark:text-foreground-dark">
+                    <div class="h-10 w-10 text-primary">
+                        <svg class="transform transition-transform duration-500 hover:rotate-6" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.8261 30.5736C16.7203 29.8826 20.2244 29.4783 24 29.4783C27.7756 29.4783 31.2797 29.8826 34.1739 30.5736C36.9144 31.2278 39.9967 32.7669 41.3563 33.8352L24.8486 7.36089C24.4571 6.73303 23.5429 6.73303 23.1514 7.36089L6.64374 33.8352C8.00331 32.7669 11.0856 31.2278 13.8261 30.5736Z" fill="currentColor"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-heading font-bold">Florida English Academy</h2>
+                </div>
+                <nav class="hidden items-center gap-9 lg:flex">
+                    <a class="text-sm font-medium text-foreground-light dark:text-foreground-dark transition-colors hover:text-primary nav-link active" href="#home">Home</a>
+                    <a class="text-sm font-medium text-foreground-light dark:text-foreground-dark transition-colors hover:text-primary nav-link" href="#about">About Us</a>
+                    <a class="text-sm font-medium text-foreground-light dark:text-foreground-dark transition-colors hover:text-primary nav-link" href="#academics">Academics</a>
+                    <a class="text-sm font-medium text-foreground-light dark:text-foreground-dark transition-colors hover:text-primary nav-link" href="#admissions">Admissions</a>
+                    <a class="text-sm font-medium text-foreground-light dark:text-foreground-dark transition-colors hover:text-primary nav-link" href="#student-life">Student Life</a>
+                    <a class="text-sm font-medium text-foreground-light dark:text-foreground-dark transition-colors hover:text-primary nav-link" href="#gallery">Gallery</a>
+                </nav>
+                <button class="hidden lg:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-secondary text-secondary-content text-sm font-bold shadow-lg transition-transform hover:scale-105 hover:shadow-xl enroll-btn">
+                    <span class="truncate">Enroll Now</span>
+                </button>
+            </header>
+
+            <main class="flex-1">
+                
+                <!-- HOME SECTION (EXACT DESIGN) -->
+                <section id="home" class="relative overflow-hidden bg-base-200 py-20 lg:py-32">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 opacity-70"></div>
+                    <div class="absolute top-1/4 left-10 w-20 h-20 bg-secondary rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-float-up animation-delay-200"></div>
+                    <div class="absolute bottom-1/4 right-10 w-24 h-24 bg-accent rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-float-up animation-delay-400"></div>
+                    
+                    <div class="container mx-auto px-5 md:px-10 lg:px-20 relative z-10">
+                        <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+                            <div class="text-center lg:text-left">
+                                <h1 class="text-4xl font-heading font-extrabold text-neutral dark:text-white sm:text-5xl lg:text-6xl animate-pop-in scribble-underline">
+                                    Discover the Joy of Learning
+                                </h1>
+                                <p class="mt-6 max-w-2xl text-lg text-subtle-light dark:text-subtle-dark lg:mx-0 mx-auto animate-fade-in animation-delay-200">
+                                    An Exclusive Medium Co-educational School<br>
+                                    <strong>Established 1st April 2010</strong>
+                                </p>
+                                <div class="mt-10 flex items-center justify-center gap-4 lg:justify-start animate-fade-in animation-delay-400">
+                                    <button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-primary text-primary-content text-base font-bold shadow-lg transition-transform hover:scale-105 hover:shadow-xl hover:rotate-2 explore-btn">
+                                        <span class="truncate">Explore</span>
+                                    </button>
+                                    <button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-white text-neutral text-base font-bold shadow-lg transition-transform hover:scale-105 hover:shadow-xl hover:-rotate-2 contact-btn">
+                                        <span class="truncate">Contact Us</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="relative h-full">
+                                <div class="relative grid grid-cols-2 gap-4 animate-pop-in">
+                                    <img alt="Student smiling" class="rounded-xl shadow-lg transform rotate-[-6deg] transition-transform duration-500 hover:rotate-0 hover:scale-105 border-4 border-white" 
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXh5VhBnrq5eTQ4CVUU-uPoRijb_Lv8w8zjH9zBpwIoBQB2kRAEZR7rHECQQeQSFf0qrZiDSs-lzPp5MlnCrcVZbed-G_d9bTunFOsu2DNa_7XczvL3vX_pP8QSlWKDLZf1qR2nbq01uJRadmQ_H2WnWm0YFM1kEkWupWCk0XP317DYPCU1hGhuyiVW5cMdJQI4Xhste1e5gFIQYa7dbOuX5kArPXRHrrdGiuUZXTMGoSLvvPNEayLopI2-IeQk38LO4QCbtsi9mQ">
+                                    <img alt="Students collaborating" class="rounded-xl shadow-lg transform rotate-[4deg] transition-transform duration-500 hover:rotate-0 hover:scale-105 mt-8 border-4 border-white" 
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtdBae8qFZ5g3EsNrmCO-Lc6TFJs6nfZuNpXvyt3txwTe5qI4uk8zLYkMUBWlYRnZSiD2t9fvEfNR3b8npvmcjZ6MdI7Mbo5MALXbgc6-a9KJ7nfvPX_ANKgb9RBiQQoHTu003CaOni4bTQnOvbUuAZau6yaSLduCoj9nueNpfyTWfHuP8orFOPPVSQX1rQnHu60v2-y4XSGEnsBbnPZ7CWxZEplBMdASxLNL6LYwlxLHzaHwm0sSIpFkcnaIAi3SjAfLhhwxpSag">
+                                    <img alt="Students in a library" class="rounded-xl shadow-lg transform rotate-[8deg] transition-transform duration-500 hover:rotate-0 hover:scale-105 col-span-2 mt-4 border-4 border-white" 
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-qVQAHVE1vgW7zYVuMc1-_Nx5mtmWrm37zw-WLOBmDLms64oOCdqd3fy1POagA8N9eFLWJcVUd1yBeC3jgjFvNzVhdvxJMy809VPAG1_NQTsZzKjTr155qYJWdPd7TpW76Glf1IcZhR6w5Kf9s3qyo2Ne53C6H2yTeDsgFOwqwu7DORBgPBZiNRmHbnUpvPs0gJlDdYmKf78e_4XGKeJU71wiVQeumAPt05Zv78tzoSNGlxCTAi9qghMP5NQe067VhPDxxEJvDWs">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- WHAT MAKES US SPECIAL -->
+                <section class="py-20 lg:py-24 px-5 md:px-20 lg:px-40">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl font-heading font-bold text-foreground-light dark:text-foreground-dark sm:text-4xl">What Makes Us Special</h2>
+                        <p class="mt-4 text-lg text-subtle-light dark:text-subtle-dark">We believe in a holistic and engaging educational journey.</p>
+                    </div>
+                    <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
+                        <div class="flex flex-col items-center text-center p-6 bg-white dark:bg-neutral rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 relative border-b-4 border-primary">
+                            <div class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/20 text-primary mb-6 relative z-10 -top-8 transition-transform duration-300 hover:scale-110">
+                                <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-foreground-light dark:text-foreground-dark mt-[-1.5rem]">Innovative Learning</h3>
+                            <p class="mt-2 text-subtle-light dark:text-subtle-dark">Creative and interactive methods that make learning fun and effective.</p>
+                        </div>
+                        <div class="flex flex-col items-center text-center p-6 bg-white dark:bg-neutral rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 relative border-b-4 border-secondary">
+                            <div class="flex h-16 w-16 items-center justify-center rounded-full bg-secondary/20 text-secondary mb-6 relative z-10 -top-8 transition-transform duration-300 hover:scale-110">
+                                <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-4 0c1.66 0 2.99-1.34 2.99-3S13.66 5 12 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-4 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm8 4H8c-2.76 0-5 2.24-5 5v2h18v-2c0-2.76-2.24-5-5-5z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-foreground-light dark:text-foreground-dark mt-[-1.5rem]">Collaborative Spirit</h3>
+                            <p class="mt-2 text-subtle-light dark:text-subtle-dark">Team projects and group activities that build strong social skills.</p>
+                        </div>
+                        <div class="flex flex-col items-center text-center p-6 bg-white dark:bg-neutral rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2 relative border-b-4 border-accent">
+                            <div class="flex h-16 w-16 items-center justify-center rounded-full bg-accent/20 text-accent mb-6 relative z-10 -top-8 transition-transform duration-300 hover:scale-110">
+                                <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2h1.93c-.11.27-.28.5-.47.72l-1.4 1.41zM18.92 14C18.96 13.67 19 13.34 19 13c0-3.87-3.13-7-7-7s-7 3.13-7 7c0 .34.04.67.08 1H3c0-.85.17-1.67.4-2.45l1.9-3.8c.24-.48.56-.92.96-1.32l3.78-3.78C10.22 3.17 11.08 3 12 3s1.78.17 2.58.48l3.78 3.78c.4.4.72.84.96 1.32l1.9 3.8C20.83 12.33 21 13.15 21 14h-2.08z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold text-foreground-light dark:text-foreground-dark mt-[-1.5rem]">Global Citizenship</h3>
+                            <p class="mt-2 text-subtle-light dark:text-subtle-dark">Preparing students to thrive in an interconnected world.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- GALLERY & NOTICE BOARD -->
+                <section id="gallery" class="bg-base-200 dark:bg-neutral/20 py-20 lg:py-24 px-5 md:px-20 lg:px-40">
+                    <div class="container mx-auto">
+                        <div class="text-center mb-16">
+                            <h2 class="text-3xl font-heading font-bold text-foreground-light dark:text-foreground-dark sm:text-4xl">Campus Life & Notice Board</h2>
+                            <p class="mt-4 text-lg text-subtle-light dark:text-subtle-dark">A snapshot of our vibrant community and the latest happenings.</p>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            <div class="lg:col-span-2">
+                                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                    <div class="group relative overflow-hidden rounded-xl animate-pop-in shadow-lg border-4 border-white hover:border-primary">
+                                        <img alt="Students in science class" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuADzJSRh7OuFLbutkYr-nQV1-o9dy1ZtP4BBw2XsZWZBpigT-bh5hN0lZ0plf-pKDQtArHG9uOMqMYj3Z06l0wm21dLO_Aza7wQAijVolzNeNI4VzQc6nRCHotCb2LgpBm8XM5bi-nZe-cG0wuryVJb2PCNDKtV2tCirf2UTQHXlyEO_1NVvlSHqQp7rt3U3W45rAAtyb-ptA-ZA1u4O1-IXiAGxbXFnAW-tN8E9CttlC0AAHdsClh8vUD_Qt5mV14JHPx7t7tlj20">
+                                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300"></div>
+                                    </div>
+                                    <div class="group relative overflow-hidden rounded-xl animate-pop-in animation-delay-200 opacity-0 md:col-span-2 shadow-lg border-4 border-white hover:border-primary">
+                                        <img alt="School grounds" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDX_sy7HJI_VK8OimpEcK4fizssnIjcdZPaeKSeDgLxhyelhVLL6MO5F_4lPvecCwuWbi1hl6sxjUr7_trB-WPTyN3ufU_YhcznXMtkrj90--MSfqmL2PHbkjde66JNNxkZlmGvhnAElvAuh1t51FNDVM9_T_hLd_4wFxrJuEVvFlZTZBtO6OE9AZJQKbWlP85fG3jsuCytIZRDh7RZqOm8YYrXxA3eL1aEr_v86U168zYaIRxBQYI5a5uIgQX8wzrB7zeXTPo8Sn4">
+                                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300"></div>
+                                    </div>
+                                    <div class="group relative overflow-hidden rounded-xl animate-pop-in animation-delay-400 opacity-0 md:col-span-2 shadow-lg border-4 border-white hover:border-primary">
+                                        <img alt="Students playing sports" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuClfIhYBeJZimkfx86tQW3cdOR1Rr8AFczwBB_DqsI9WRMRhnWBM6_PNkKEtTuhnQCXUAQIgKG_suaE4lJKKff7nUDvy5o5C5m7HSb2s0x5sd8fhU5pyKR8tB8tL_rWloXBxBnxaY82fhHyw-hLggRCYiGq1D8Kp-j23s6axFOOazv768Myc7d3Z_Wo5apSzKA8Aq-Tm3VFRH79sTIc-k2Lhq7k1TNHAXU8fHTxsFZRKu-y1tqbpc62Uppq_aW42JJ81hpu2IzxBKw">
+                                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300"></div>
+                                    </div>
+                                    <div class="group relative overflow-hidden rounded-xl animate-pop-in animation-delay-200 opacity-0 shadow-lg border-4 border-white hover:border-primary">
+                                        <img alt="Art class" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-oZle52hKwlYv_rqezsB4MMsBjZxvB3x3cQC3ooH9D4-dr7X3fKBVINjep9H8nwqtLLo-9BvevKwFJ8o3-9QDzcH-DVDKCoBUCDRkIpdj_7xLzzAEtD4oNptRCNzwQkpKrALibcgL0JocomGkm_kL9WVNgeu17PneMVYy9QqSk_XFh7LcE3N-0dCRMpOrKubdlQsKrSUnp7bRH59FP82tyCo6LChDR25m-yUsB5AzkJDc56x4CcToM4wX2dYY2g-TZKHPbcix4Hk">
+                                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white dark:bg-neutral rounded-xl shadow-lg p-6 animate-float-up relative overflow-hidden border-4 border-dashed border-primary/30">
+                                <div class="absolute -top-6 -right-6 w-20 h-20 bg-secondary/50 rounded-full blur-md opacity-50"></div>
+                                <h3 class="text-2xl font-heading font-bold text-foreground-light dark:text-foreground-dark mb-4 relative z-10">Notice Board</h3>
+                                <div class="space-y-4 relative z-10">
+                                    <div class="p-4 bg-primary/10 rounded-lg animate-fade-in relative group border border-primary/20 hover:border-primary transition-all duration-300">
+                                        <h4 class="font-semibold text-primary">Annual Sports Day</h4>
+                                        <p class="text-sm text-subtle-light dark:text-subtle-dark">Mark your calendars for Dec 15th! Fun, games, and friendly competition await.</p>
+                                    </div>
+                                    <div class="p-4 bg-secondary/10 rounded-lg animate-fade-in animation-delay-200 relative group border border-secondary/20 hover:border-secondary transition-all duration-300">
+                                        <h4 class="font-semibold text-secondary">Parent-Teacher Meeting</h4>
+                                        <p class="text-sm text-subtle-light dark:text-subtle-dark">Scheduled for Nov 28th. Check your email for appointment slots.</p>
+                                    </div>
+                                    <div class="p-4 bg-accent/10 rounded-lg animate-fade-in animation-delay-400 relative group border border-accent/20 hover:border-accent transition-all duration-300">
+                                        <h4 class="font-semibold text-accent">Science Fair Submissions</h4>
+                                        <p class="text-sm text-subtle-light dark:text-subtle-dark">Deadline for project submission is Dec 5th. Let your creativity shine!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CTA -->
+                <section class="px-5 py-20 md:px-20 lg:px-40">
+                    <div class="flex flex-col items-center justify-center gap-8 rounded-xl bg-gradient-to-br from-primary to-accent px-10 py-20 text-center text-white shadow-2xl relative overflow-hidden">
+                        <div class="absolute -top-10 -left-10 w-48 h-48 bg-white/20 rounded-full mix-blend-overlay animate-wiggle animation-delay-200"></div>
+                        <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-white/10 rounded-full mix-blend-overlay animate-wiggle animation-delay-400"></div>
+                        <h2 class="text-3xl font-heading font-extrabold sm:text-4xl relative z-10">Ready to Join the Fun?</h2>
+                        <p class="text-lg opacity-90 max-w-2xl relative z-10">Become part of a dynamic community that celebrates learning, creativity, and personal growth.</p>
+                        <button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-white text-primary font-bold shadow-lg transition-transform hover:scale-105 hover:shadow-xl relative z-10 hover:rotate-[-3deg] tour-btn">
+                            <span class="truncate">Schedule a Tour</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- ABOUT -->
+                <section id="about" class="py-20 lg:py-24 px-5 md:px-20 lg:px-40 bg-base-100">
+                    <div class="container mx-auto max-w-4xl">
+                        <div class="text-center mb-16">
+                            <h2 class="text-3xl font-heading font-bold sm:text-4xl">About Us</h2>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-lg p-8">
+                            <p class="text-lg mb-6 leading-relaxed">
+                                On the auspicious day of <strong>1st April 2010</strong>, Florida English Academy was established by respected <strong>Adiba Saoban</strong>.
+                            </p>
+                            <p class="text-lg mb-6 leading-relaxed">
+                                <strong>Governing Body:</strong> Afeefa Educational and Welfare Society<br>
+                                <strong>President:</strong> Ishteyaq Imam (M.Sc, B.Ed.)<br><br>
+                                <strong>Key Personnel:</strong><br>
+                                <strong>Director:</strong> Tahir Saoban<br>
+                                <strong>Vice Principal:</strong> Nazir Mannan
+                            </p>
+                            <p class="text-2xl font-bold text-primary text-center mt-8">
+                                Our Mission: "Provide easy and perfect education to all."
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ACADEMICS -->
+                <section id="academics" class="py-20 lg:py-24 px-5 md:px-20 lg:px-40">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl font-heading font-bold sm:text-4xl">Academics</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                        <div class="bg-white rounded-xl p-6 shadow-md">
+                            <h3 class="text-xl font-bold mb-4">Primary (Grades 1-5)</h3>
+                            <ul class="text-subtle-light space-y-2">
+                                <li>• English Language</li>
+                                <li>• Mathematics</li>
+                                <li>• Science</li>
+                                <li>• Social Studies</li>
+                                <li>• Arts & Crafts</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white rounded-xl p-6 shadow-md">
+                            <h3 class="text-xl font-bold mb-4">Middle (Grades 6-8)</h3>
+                            <ul class="text-subtle-light space-y-2">
+                                <li>• Advanced English</li>
+                                <li>• Algebra & Geometry</li>
+                                <li>• Physics</li>
+                                <li>• History & Geography</li>
+                                <li>• Computer Basics</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white rounded-xl p-6 shadow-md">
+                            <h3 class="text-xl font-bold mb-4">Senior (Grades 9-12)</h3>
+                            <ul class="text-subtle-light space-y-2">
+                                <li>• Literature</li>
+                                <li>• Calculus</li>
+                                <li>• Chemistry</li>
+                                <li>• Economics</li>
+                                <li>• Programming</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- STUDENT LIFE -->
+                <section id="student-life" class="py-20 lg:py-24 px-5 md:px-20 lg:px-40 bg-base-200">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl font-heading font-bold sm:text-4xl">Student Life</h2>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-16">
+                        <div class="bg-white rounded-xl p-6 text-center shadow-md">
+                            <div class="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4">☀️</div>
+                            <h3 class="font-bold">Sun House</h3>
+                            <p class="text-2xl font-bold text-yellow-600">1250 Points</p>
+                        </div>
+                        <div class="bg-white rounded-xl p-6 text-center shadow-md">
+                            <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">🌙</div>
+                            <h3 class="font-bold">Moon House</h3>
+                            <p class="text-2xl font-bold text-blue-600">1180 Points</p>
+                        </div>
+                        <div class="bg-white rounded-xl p-6 text-center shadow-md">
+                            <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">⭐</div>
+                            <h3 class="font-bold">Star House</h3>
+                            <p class="text-2xl font-bold text-purple-600">1320 Points</p>
+                        </div>
+                        <div class="bg-white rounded-xl p-6 text-center shadow-md">
+                            <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">🌍</div>
+                            <h3 class="font-bold">Earth House</h3>
+                            <p class="text-2xl font-bold text-green-600">1290 Points</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ADMISSIONS -->
+                <section id="admissions" class="py-20 lg:py-24 px-5 md:px-20 lg:px-40 bg-base-100">
+                    <div class="container mx-auto max-w-2xl">
+                        <div class="text-center mb-16">
+                            <h2 class="text-3xl font-heading font-bold sm:text-4xl">Online Admissions</h2>
+                        </div>
+                        <form id="admissionForm" class="bg-white rounded-xl p-8 shadow-lg">
+                            <div class="step-progress flex justify-between mb-8">
+                                <div class="step-item flex-1 p-3 text-center bg-primary/20 text-primary rounded-full font-bold">1. Personal</div>
+                                <div class="step-item flex-1 p-3 text-center bg-gray-200 rounded-full">2. Academic</div>
+                                <div class="step-item flex-1 p-3 text-center bg-gray-200 rounded-full">3. Documents</div>
+                                <div class="step-item flex-1 p-3 text-center bg-gray-200 rounded-full">4. Guardian</div>
+                                <div class="step-item flex-1 p-3 text-center bg-gray-200 rounded-full">5. Review</div>
+                            </div>
+                            
+                            <div class="step-content active">
+                                <input type="text" class="w-full p-3 mb-4 rounded-lg border border-gray-300" placeholder="Full Name" required>
+                                <input type="date" class="w-full p-3 mb-4 rounded-lg border border-gray-300" required>
+                                <select class="w-full p-3 mb-4 rounded-lg border border-gray-300">
+                                    <option>Select Grade</option>
+                                    <option>Grade 1</option>
+                                    <option>Grade 2</option>
+                                    <option>Grade 3</option>
+                                    <option>Grade 4</option>
+                                    <option>Grade 5</option>
+                                </select>
+                                <input type="tel" class="w-full p-3 mb-4 rounded-lg border border-gray-300" placeholder="Phone Number" required>
+                            </div>
+                            
+                            <div class="flex justify-end gap-4 mt-8">
+                                <button type="button" id="nextBtn" class="px-6 py-3 bg-primary text-white rounded-full font-bold">Next</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+            </main>
+
+            <!-- FOOTER -->
+            <footer class="border-t border-primary/20 px-5 py-10 text-center md:px-20 lg:px-40 bg-base-100 dark:bg-neutral">
+                <div class="flex flex-col items-center justify-between gap-8 md:flex-row">
+                    <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-4">
+                        <a class="text-sm text-subtle-light dark:text-subtle-dark transition-colors hover:text-primary" href="#">Privacy Policy</a>
+                        <a class="text-sm text-subtle-light dark:text-subtle-dark transition-colors hover:text-primary" href="#">Terms of Service</a>
+                        <a class="text-sm text-subtle-light dark:text-subtle-dark transition-colors hover:text-primary" href="#">Contact Us</a>
+                    </div>
+                    <p class="text-sm text-subtle-light dark:text-subtle-dark">© 2023 Florida English Academy. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- COMPLETE JAVASCRIPT -->
+    <script>
+        // EmailJS Init (Replace with your keys)
+        emailjs.init("YOUR_PUBLIC_KEY");
+
+        // Smooth Navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+
+        // Enroll Button - Scroll to Admissions
+        document.querySelector('.enroll-btn').addEventListener('click', () => {
+            document.getElementById('admissions').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Multi-step Form
+        let currentStep = 0;
+        const steps = 4; // 0-4
+        const nextBtn = document.getElementById('nextBtn');
+        
+        nextBtn.addEventListener('click', () => {
+            if (currentStep < steps) {
+                document.querySelectorAll('.step-content')[currentStep].classList.remove('active');
+                currentStep++;
+                document.querySelector('.step-progress div:nth-child(' + (currentStep + 1) + ')').classList.add('bg-primary', 'text-white');
+                if (currentStep < steps) {
+                    document.querySelectorAll('.step-content')[currentStep].classList.add('active');
+                } else {
+                    // Submit
+                    document.getElementById('admissionForm').submit();
+                }
+            }
+        });
+
+        // Form Submission
+        document.getElementById('admissionForm').addEventListener('submit', async e => {
+            e.preventDefault();
+            alert('Application submitted successfully! 🎉\nCheck your email for confirmation.');
+            e.target.reset();
+            currentStep = 0;
+        });
+
+        // GSAP Animations
+        gsap.from('.animate-pop-in', { duration: 0.8, scale: 0.8, opacity: 0, stagger: 0.2 });
+        gsap.from('.animate-float-up', { duration: 1, y: 50, opacity: 0, stagger: 0.3 });
+        gsap.from('.animate-fade-in', { duration: 1.2, opacity: 0, stagger: 0.2 });
+
+        // Scroll Animations
+        window.addEventListener('scroll', () => {
+            gsap.to('.card', {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: "power2.out"
+            });
+        });
+    </script>
+</body>
+</html>
